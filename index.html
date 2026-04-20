@@ -1,0 +1,932 @@
+<!DOCTYPE html>
+
+<html lang="fr">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>RBC Solution – Val-d'Oise</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;600;700;800&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --vert:#2d5a1b; --vert-mid:#3d7825; --vert-light:#d6e8cc; --vert-pale:#eef5e8;
+      --marron:#4a4a4a; --marron-mid:#666666; --marron-light:#e0e0e0; --marron-pale:#f5f5f5;
+      --creme:#f5efe4; --creme-dark:#ede4d6; --creme-deep:#e4d8c8; --beige:#d4c4a8;
+      --texte:#2c2318; --texte-doux:#6b5a48; --blanc-chaud:#fdf9f3;
+      --shadow:0 4px 24px rgba(44,35,24,.10); --shadow-lg:0 12px 48px rgba(44,35,24,.14);
+      --r:12px; --t:.32s cubic-bezier(.4,0,.2,1);
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{font-family:'Raleway',sans-serif;background:var(--creme);color:var(--texte-doux);overflow-x:hidden}
+    a{text-decoration:none;color:inherit}
+    img{display:block;max-width:100%}
+    h1,h2,h3{font-family:'Lora',serif;color:var(--texte);line-height:1.2}
+    h1{font-size:clamp(2.2rem,5.5vw,3.8rem)}
+    h2{font-size:clamp(1.7rem,3.5vw,2.6rem)}
+    h3{font-size:1.1rem}
+    p{line-height:1.82}
+    .page{display:none;padding-top:80px;min-height:100vh}
+    .page.active{display:block}
+
+```
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(245,239,228,.97);backdrop-filter:blur(16px);border-bottom:2px solid var(--creme-dark);height:80px;display:flex;align-items:center;justify-content:space-between;padding:0 5%}
+.nav-links{display:flex;gap:4px;list-style:none;align-items:center}
+.nav-links a{padding:8px 14px;border-radius:6px;font-size:.78rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--texte-doux);transition:var(--t);cursor:pointer}
+.nav-links a:hover,.nav-links a.active{background:var(--vert-pale);color:var(--vert)}
+.nav-tel{background:var(--vert)!important;color:#fff!important;display:flex;align-items:center;gap:6px}
+.nav-tel:hover{background:var(--vert-mid)!important}
+.nav-devis{background:var(--marron)!important;color:#fff!important}
+.nav-devis:hover{opacity:.88!important}
+.burger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:5px}
+.burger span{width:24px;height:2px;background:var(--texte);border-radius:2px;transition:var(--t)}
+.mob-menu{display:none;flex-direction:column;position:fixed;top:80px;left:0;right:0;z-index:199;background:var(--creme);border-bottom:2px solid var(--creme-dark);padding:16px 5%;gap:4px}
+.mob-menu.open{display:flex}
+.mob-menu a{padding:12px 16px;border-radius:8px;font-size:.88rem;font-weight:700;text-transform:uppercase;color:var(--texte-doux);transition:var(--t);cursor:pointer}
+.mob-menu a:hover{background:var(--vert-pale);color:var(--vert)}
+
+/* BOUTONS */
+.btn{display:inline-flex;align-items:center;gap:8px;padding:14px 28px;border-radius:8px;font-family:'Raleway',sans-serif;font-size:.85rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;border:none;transition:var(--t)}
+.btn-vert{background:var(--vert);color:#fff}
+.btn-vert:hover{background:var(--vert-mid);transform:translateY(-2px);box-shadow:0 8px 24px rgba(45,90,27,.28)}
+.btn-marron{background:var(--marron);color:#fff}
+.btn-marron:hover{opacity:.88;transform:translateY(-2px)}
+.btn-creme{background:var(--blanc-chaud);color:var(--vert)}
+.btn-creme:hover{background:#fff;transform:translateY(-2px)}
+.btn-outline-blanc{background:transparent;color:#fff;border:2px solid rgba(255,255,255,.45)}
+.btn-outline-blanc:hover{background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.8)}
+
+/* COMPOSANTS */
+.chip{display:inline-block;font-size:.68rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;padding:5px 14px;border-radius:99px;margin-bottom:14px}
+.chip-vert{background:var(--vert-light);color:var(--vert)}
+.chip-marron{background:var(--marron-light);color:var(--marron)}
+.section{padding:90px 8%}
+.section-creme{background:var(--creme-dark)}
+.section-marron-pale{background:var(--marron-pale)}
+.s-intro{font-size:.96rem;color:var(--texte-doux);max-width:540px;margin:10px 0 50px;line-height:1.85}
+
+/* HERO */
+.hero{min-height:calc(100vh - 80px);background:linear-gradient(150deg,#1e3d10 0%,#2d5a1b 50%,#3a4a20 100%);position:relative;overflow:hidden;padding:70px 8% 80px;}
+.hero-texture{position:absolute;inset:0;pointer-events:none;background-image:radial-gradient(circle at 20% 80%,rgba(107,68,35,.25) 0%,transparent 50%),radial-gradient(circle at 80% 20%,rgba(255,255,255,.04) 0%,transparent 50%)}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(245,239,228,.14);border:1px solid rgba(245,239,228,.25);color:rgba(255,255,255,.88);font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:7px 16px;border-radius:99px;margin-bottom:26px}
+.hero h1{color:#fff;margin-bottom:16px}
+.hero h1 em{color:#c8e8a8;font-style:normal}
+.hero-sub{color:rgba(255,255,255,.7);font-size:.97rem;margin-bottom:36px;max-width:520px}
+.hero-btns{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:20px}
+.hero-trust{display:flex;gap:36px;flex-wrap:wrap;justify-content:center;margin-top:44px;}
+.trust-item .t-num{font-family:'Lora',serif;font-size:2rem;font-weight:600;color:#c8e8a8;display:block}
+.trust-item .t-lbl{font-size:.68rem;color:rgba(255,255,255,.55);text-transform:uppercase;letter-spacing:.09em}
+
+/* SERVICES */
+.svc-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:18px}
+.svc-card{background:var(--blanc-chaud);border-radius:var(--r);padding:26px 22px;box-shadow:var(--shadow);border-bottom:3px solid transparent;transition:var(--t)}
+.svc-card.g{border-bottom-color:var(--vert)}
+.svc-card.m{border-bottom-color:var(--marron)}
+.svc-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg)}
+.svc-cta{margin-top:14px;font-size:.76rem;font-weight:800;letter-spacing:.07em;text-transform:uppercase;color:var(--vert);display:flex;align-items:center;gap:4px;border-top:1px solid var(--vert-light);padding-top:12px;transition:var(--t)}
+.svc-cta-m{color:var(--marron);border-top-color:var(--marron-light)}
+.svc-card:hover .svc-cta,.svc-card:hover .svc-cta-m{gap:8px}
+.svc-card .ico{font-size:2rem;margin-bottom:12px}
+.svc-card h3{margin-bottom:8px}
+.svc-card p{font-size:.83rem;color:var(--texte-doux)}
+
+/* PROCESS */
+.process-wrap{display:grid;grid-template-columns:repeat(4,1fr);gap:0;position:relative;margin-top:10px}
+.process-wrap::before{content:'';position:absolute;top:34px;left:calc(12.5% + 18px);right:calc(12.5% + 18px);height:2px;background:linear-gradient(90deg,var(--vert-light),var(--vert),var(--vert-light))}
+.p-step{text-align:center;padding:0 18px}
+.p-num{width:68px;height:68px;border-radius:50%;background:var(--blanc-chaud);border:3px solid var(--vert);display:flex;align-items:center;justify-content:center;font-family:'Lora',serif;font-size:1.4rem;font-weight:600;color:var(--vert);margin:0 auto 18px;position:relative;z-index:2;box-shadow:0 4px 14px rgba(45,90,27,.14)}
+.p-step h3{font-size:.92rem;margin-bottom:7px}
+.p-step p{font-size:.8rem;color:var(--texte-doux);line-height:1.65}
+
+/* AVIS */
+.avis-top{display:flex;align-items:center;gap:22px;margin-bottom:40px;flex-wrap:wrap}
+.avis-score-box{background:var(--vert);color:#fff;border-radius:14px;padding:18px 26px;text-align:center;flex-shrink:0}
+.avis-score-box .n{font-family:'Lora',serif;font-size:2.8rem;font-weight:600;line-height:1}
+.avis-score-box .s{font-size:1.1rem;margin:4px 0}
+.avis-score-box .l{font-size:.68rem;opacity:.75;text-transform:uppercase;letter-spacing:.09em}
+.avis-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:18px}
+.avis-card{background:var(--blanc-chaud);border-radius:var(--r);padding:24px;box-shadow:var(--shadow);border-top:3px solid var(--vert-light);transition:var(--t)}
+.avis-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-lg)}
+.avis-stars{color:#c8860a;font-size:1rem;margin-bottom:12px}
+.avis-card p{font-size:.86rem;font-style:italic;color:var(--texte-doux);line-height:1.75;margin-bottom:14px}
+.avis-author{display:flex;align-items:center;gap:10px}
+.avis-av{width:38px;height:38px;border-radius:50%;background:var(--vert-pale);color:var(--vert);display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.82rem;flex-shrink:0}
+.avis-name{font-size:.82rem;font-weight:700;color:var(--texte)}
+.avis-ville{font-size:.74rem;color:var(--texte-doux)}
+
+/* FAQ */
+.faq-wrap{display:flex;flex-direction:column;gap:10px;max-width:780px;margin:0 auto}
+.faq-item{background:var(--blanc-chaud);border-radius:var(--r);overflow:hidden;box-shadow:var(--shadow);border:1.5px solid var(--creme-dark)}
+.faq-q{padding:20px 24px;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:16px;font-weight:700;font-size:.9rem;color:var(--texte);transition:var(--t);user-select:none}
+.faq-q:hover,.faq-q.open{background:var(--vert-pale);color:var(--vert)}
+.faq-ico{font-size:1.2rem;transition:var(--t);flex-shrink:0}
+.faq-q.open .faq-ico{transform:rotate(45deg)}
+.faq-a{max-height:0;overflow:hidden;font-size:.86rem;line-height:1.8;color:var(--texte-doux);transition:max-height .35s ease,padding .35s ease;padding:0 24px}
+.faq-a.open{max-height:300px;padding:0 24px 20px}
+
+/* CTA STRIP */
+.cta-strip{background:linear-gradient(140deg,#1a3810 0%,#2d5a1b 60%,#3a4a20 100%);padding:75px 8%;text-align:center;position:relative;overflow:hidden}
+.cta-strip::before{content:'';position:absolute;inset:0;pointer-events:none;background:radial-gradient(circle at 10% 90%,rgba(107,68,35,.2) 0%,transparent 45%),radial-gradient(circle at 90% 10%,rgba(200,232,168,.06) 0%,transparent 45%)}
+.cta-strip h2{color:#fff;margin-bottom:14px;position:relative}
+.cta-strip p{color:rgba(255,255,255,.7);margin-bottom:32px;position:relative;max-width:500px;margin-left:auto;margin-right:auto}
+.cta-btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;position:relative}
+.cta-badges{display:flex;gap:12px;justify-content:center;margin-top:28px;flex-wrap:wrap;position:relative}
+.cta-badge{background:rgba(245,239,228,.12);border:1px solid rgba(245,239,228,.2);color:rgba(255,255,255,.82);font-size:.72rem;font-weight:700;padding:6px 14px;border-radius:99px;letter-spacing:.05em}
+
+/* CONTACT */
+.contact-grid{display:grid;grid-template-columns:1fr 1.3fr;gap:60px;align-items:start}
+.contact-infos{display:flex;flex-direction:column;gap:20px}
+.c-row{display:flex;gap:16px;align-items:flex-start}
+.c-ico{width:50px;height:50px;border-radius:12px;flex-shrink:0;background:var(--vert-pale);display:flex;align-items:center;justify-content:center;font-size:1.3rem;border:1.5px solid var(--vert-light)}
+.c-row h4{font-family:'Raleway',sans-serif;font-size:.68rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:#ffffff;margin-bottom:3px}
+.c-row p{font-size:.92rem;font-weight:700;color:#ffffff}
+.etapes-box{background:var(--vert-pale);border-radius:12px;padding:22px;border:1.5px solid var(--vert-light)}
+.etapes-box h3{font-size:.95rem;margin-bottom:10px;color:#1a1a1a}
+.etapes-box p{font-size:.83rem;color:#444;line-height:1.85}
+.etapes-box strong{color:var(--vert)}
+.form-box{background:var(--blanc-chaud);border-radius:16px;padding:36px;box-shadow:var(--shadow-lg);border:1.5px solid var(--creme-dark)}
+.form-row2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.fg{margin-bottom:15px}
+.fg label{display:block;font-size:.68rem;font-weight:800;letter-spacing:.09em;text-transform:uppercase;color:#444;margin-bottom:6px}
+.fg input,.fg select,.fg textarea{width:100%;padding:12px 16px;border:1.5px solid var(--creme-deep);border-radius:8px;font-family:'Raleway',sans-serif;font-size:.88rem;color:var(--texte);background:var(--creme);outline:none;transition:var(--t)}
+.fg input:focus,.fg select:focus,.fg textarea:focus{border-color:var(--vert);box-shadow:0 0 0 3px rgba(45,90,27,.1);background:var(--blanc-chaud)}
+.fg textarea{resize:vertical;min-height:100px}
+
+/* ZONE */
+.zone-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start}
+.zone-map{background:linear-gradient(135deg,var(--vert-pale),var(--creme-dark));border-radius:16px;height:370px;border:2px solid var(--vert-light);display:flex;align-items:center;justify-content:center;font-size:4.5rem;position:relative;overflow:hidden}
+.zone-map::after{content:'📍 Val-d\'Oise (95)';position:absolute;bottom:18px;left:50%;transform:translateX(-50%);background:var(--vert);color:#fff;font-size:.75rem;font-family:'Raleway',sans-serif;font-weight:800;letter-spacing:.09em;text-transform:uppercase;padding:7px 18px;border-radius:99px;white-space:nowrap}
+.zone-note{margin-top:18px;padding:14px 18px;background:var(--marron-pale);border-left:3px solid var(--marron);border-radius:0 8px 8px 0;font-size:.83rem;color:var(--marron);font-weight:600}
+
+/* À PROPOS */
+.ap-grid{display:grid;grid-template-columns:1fr 1fr;gap:70px;align-items:center}
+.ap-vis{position:relative}
+.ap-img{width:100%;aspect-ratio:1;border-radius:20px;background:linear-gradient(135deg,var(--vert-pale),var(--creme-deep));display:flex;align-items:center;justify-content:center;font-size:5.5rem;border:2px solid var(--vert-light)}
+.ap-badge{position:absolute;bottom:-16px;right:-16px;background:var(--marron);color:#fff;border-radius:14px;padding:16px 20px;text-align:center;box-shadow:0 8px 24px rgba(107,68,35,.3)}
+.ap-badge strong{display:block;font-family:'Lora',serif;font-size:1.6rem}
+.ap-badge span{font-size:.68rem;opacity:.8;font-family:'Raleway',sans-serif;font-weight:700;letter-spacing:.08em;text-transform:uppercase}
+.ap-txt h2{margin-bottom:18px}
+.ap-txt p{margin-bottom:14px;font-size:.9rem;color:var(--texte-doux)}
+.ap-vals{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:30px}
+.ap-val{background:var(--creme-dark);border-radius:10px;padding:16px 18px;border-left:3px solid var(--vert)}
+.ap-val h4{font-size:.88rem;margin-bottom:3px}
+.ap-val p{font-size:.76rem;color:var(--texte-doux);margin:0}
+
+/* FOOTER */
+footer{background:#1a1208;color:rgba(245,239,228,.45)}
+.footer-main{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px;padding:60px 8% 40px;border-bottom:1px solid rgba(245,239,228,.07)}
+.f-brand .f-logo-txt{font-family:'Lora',serif;font-size:1.6rem;font-weight:600;color:rgba(245,239,228,.85);margin-bottom:6px}
+.f-col h4{font-family:'Raleway',sans-serif;font-size:.68rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:rgba(245,239,228,.3);margin-bottom:16px}
+.f-col ul{list-style:none;display:flex;flex-direction:column;gap:8px}
+.f-col a{font-size:.8rem;transition:var(--t);cursor:pointer}
+.f-col a:hover{color:rgba(200,232,168,.9)}
+.footer-btm{display:flex;justify-content:space-between;align-items:center;padding:20px 8%;font-size:.73rem;flex-wrap:wrap;gap:10px}
+.footer-btm span{color:rgba(245,239,228,.25)}
+.footer-btm em{color:rgba(200,232,168,.5);font-style:normal}
+
+/* GALERIE */
+#galerie-grid img{transition:.3s ease}
+
+/* ANIMATIONS */
+@keyframes fadeUp{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
+.au{animation:fadeUp .55s ease both}
+.d1{animation-delay:.05s}.d2{animation-delay:.13s}.d3{animation-delay:.21s}
+.d4{animation-delay:.29s}.d5{animation-delay:.37s}.d6{animation-delay:.45s}
+
+
+
+/* PARALLAX HERO */
+.parallax-slow { will-change: transform; }
+.parallax-mid  { will-change: transform; }
+.parallax-fast { will-change: transform; }
+.hero { overflow: hidden; }
+/* SCROLL REVEAL */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+.reveal-delay-4 { transition-delay: 0.4s; }
+/* RESPONSIVE */
+@media(max-width:900px){
+  .contact-grid,.ap-grid,.zone-grid{grid-template-columns:1fr}
+  .process-wrap{grid-template-columns:1fr 1fr;gap:28px}
+  .process-wrap::before{display:none}
+  .footer-main{grid-template-columns:1fr 1fr}
+  .burger{display:flex}
+  .nav-links{display:none}
+  .hero-cards{grid-template-columns:1fr!important}
+}
+@media(max-width:580px){
+  .footer-main{grid-template-columns:1fr}
+  .process-wrap{grid-template-columns:1fr}
+  .form-row2{grid-template-columns:1fr}
+  .ap-vals{grid-template-columns:1fr}
+  .avis-top{flex-direction:column;align-items:flex-start}
+}
+```
+
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+
+<nav>
+  <div onclick="goPage('accueil')" style="cursor:pointer;display:flex;align-items:center;gap:12px;">
+    <svg viewBox="0 0 68 68" width="54" height="54" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="34" cy="34" r="30" fill="none" stroke="#4a4a4a" stroke-width="4"/>
+      <circle cx="34" cy="34" r="22" fill="none" stroke="#2d5a1b" stroke-width="1.5" stroke-dasharray="5 3"/>
+      <polygon points="34,6 29,34 34,30 39,34" fill="#2d5a1b"/>
+      <polygon points="34,62 29,34 34,38 39,34" fill="#6a6a6a"/>
+      <polygon points="62,34 34,29 38,34 34,39" fill="#5a4a3a"/>
+      <polygon points="6,34 34,29 30,34 34,39" fill="#5a4a3a"/>
+      <circle cx="34" cy="34" r="4.5" fill="#f5efe4" stroke="#4a4a4a" stroke-width="1.5"/>
+    </svg>
+    <div style="display:flex;flex-direction:column;line-height:1.1;">
+      <div style="display:flex;align-items:baseline;">
+        <span style="font-family:'Raleway',sans-serif;font-weight:800;font-size:1.25rem;color:#2d5a1b;letter-spacing:.02em;">RBC</span>
+        <span style="font-family:'Raleway',sans-serif;font-weight:700;font-size:1.25rem;color:#4a4a4a;letter-spacing:.04em;"> SOLUTION</span>
+      </div>
+      <span style="font-family:'Lora',serif;font-size:.6rem;color:#9a8a78;letter-spacing:.1em;font-style:italic;">Un problème ? Une solution.</span>
+    </div>
+  </div>
+  <ul class="nav-links" id="navLinks">
+    <li><a class="active" onclick="goPage('accueil',this)">Accueil</a></li>
+    <li><a onclick="goPage('services-vert',this)">🌿 Solution Vert</a></li>
+    <li><a onclick="goPage('services-solution',this)">🔄 Solution Renouveau</a></li>
+    <li><a onclick="goPage('realisations',this)">Réalisations</a></li>
+    <li><a onclick="goPage('apropos',this)">À propos</a></li>
+    <li><a href="tel:0768582562" class="nav-tel">📞 07 68 58 25 62</a></li>
+    <li><a onclick="goPage('contact',this)" class="nav-devis">Devis gratuit</a></li>
+  </ul>
+  <div class="burger" id="burger" onclick="toggleBurger()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+<div class="mob-menu" id="mobMenu">
+  <a onclick="goPage('accueil')">Accueil</a>
+  <a onclick="goPage('services-vert')">🌿 RBC Solution Vert</a>
+  <a onclick="goPage('services-solution')">🔄 RBC Solution Renouveau</a>
+  <a onclick="goPage('realisations')">Réalisations</a>
+  <a onclick="goPage('apropos')">À propos</a>
+  <a onclick="goPage('contact')">Devis gratuit</a>
+  <a href="tel:0768582562">📞 07 68 58 25 62</a>
+</div>
+
+<!-- ══════════════════════════════════
+     PAGE : ACCUEIL
+═══════════════════════════════════ -->
+
+<div id="page-accueil" class="page active">
+
+  <section class="hero">
+    <div class="hero-texture parallax-slow" id="hero-bg"></div>
+    <div style="position:relative;z-index:2;text-align:center;margin-bottom:44px;">
+      <span class="hero-badge au d1 parallax-fast" id="hero-badge">📍 Taverny & Val-d'Oise</span>
+      <h1 class="au d2 parallax-mid" id="hero-title">Un problème ?<br><em>Une solution.</em></h1>
+      <p class="hero-sub au d3" style="margin:0 auto 28px;">Nous intervenons chez vous avec soin et professionnalisme dans le Val-d'Oise.</p>
+      <div class="hero-btns au d3" style="justify-content:center;">
+        <button class="btn btn-creme" onclick="goPage('contact')">Devis gratuit →</button>
+        <button class="btn btn-outline-blanc" onclick="goPage('services-vert')">🌿 Solution Vert</button>
+        <button class="btn btn-outline-blanc" onclick="goPage('services-solution')">🔄 Solution Renouveau</button>
+      </div>
+      <div class="au d4" style="display:flex;gap:14px;justify-content:center;margin-top:16px;flex-wrap:wrap;">
+        <a href="https://www.instagram.com/rbc.solution" target="_blank" style="display:flex;align-items:center;gap:8px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);color:#fff;font-size:.8rem;font-weight:700;padding:9px 18px;border-radius:99px;">
+          📸 @rbc.solution Instagram
+        </a>
+        <a href="https://www.tiktok.com/@rbc.solution" target="_blank" style="display:flex;align-items:center;gap:8px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);color:#fff;font-size:.8rem;font-weight:700;padding:9px 18px;border-radius:99px;">
+          🎵 @rbc.solution TikTok
+        </a>
+      </div>
+    </div>
+
+```
+<div class="au d4 hero-cards parallax-slow" id="hero-cards" style="position:relative;z-index:2;display:grid;grid-template-columns:1fr 1fr;gap:20px;">
+  <div onclick="goPage('services-vert')" style="background:rgba(45,90,27,.6);border:2px solid rgba(200,232,168,.35);border-radius:18px;padding:36px 32px;cursor:pointer;transition:var(--t);"
+    onmouseover="this.style.transform='translateY(-5px)';this.style.background='rgba(45,90,27,.8)'"
+    onmouseout="this.style.transform='none';this.style.background='rgba(45,90,27,.6)'">
+    <div style="font-size:3.2rem;margin-bottom:16px;">🌿</div>
+    <div style="font-size:.68rem;font-weight:800;letter-spacing:.15em;text-transform:uppercase;color:#c8e8a8;margin-bottom:10px;">Pôle Espaces Verts</div>
+    <h3 style="color:#fff;font-family:'Lora',serif;font-size:1.5rem;margin-bottom:12px;">RBC Solution Vert</h3>
+    <p style="color:rgba(255,255,255,.68);font-size:.88rem;line-height:1.7;">Jardinage · Entretien · Taille de haies · Aménagement paysager · Rénovation extérieure</p>
+    <div style="margin-top:22px;font-size:.8rem;font-weight:800;color:#c8e8a8;letter-spacing:.08em;text-transform:uppercase;border-top:1px solid rgba(200,232,168,.2);padding-top:16px;">Voir les prestations →</div>
+  </div>
+  <div onclick="goPage('services-solution')" style="background:rgba(107,68,35,.6);border:2px solid rgba(245,239,228,.2);border-radius:18px;padding:36px 32px;cursor:pointer;transition:var(--t);"
+    onmouseover="this.style.transform='translateY(-5px)';this.style.background='rgba(107,68,35,.8)'"
+    onmouseout="this.style.transform='none';this.style.background='rgba(107,68,35,.6)'">
+    <div style="font-size:3.2rem;margin-bottom:16px;">🚛</div>
+    <div style="font-size:.68rem;font-weight:800;letter-spacing:.15em;text-transform:uppercase;color:#e8c898;margin-bottom:10px;">Pôle Débarras & Déménagement</div>
+    <h3 style="color:#fff;font-family:'Lora',serif;font-size:1.5rem;margin-bottom:12px;">RBC Solution Renouveau</h3>
+    <p style="color:rgba(255,255,255,.68);font-size:.88rem;line-height:1.7;">Débarras · Déménagement · Syndrome de Diogène · Remise en état locatif</p>
+    <div style="margin-top:22px;font-size:.8rem;font-weight:800;color:#e8c898;letter-spacing:.08em;text-transform:uppercase;border-top:1px solid rgba(245,239,228,.15);padding-top:16px;">Voir les prestations →</div>
+  </div>
+</div>
+
+<div class="hero-trust au d5 parallax-mid" id="hero-trust">
+  <div class="trust-item"><span class="t-num">24h</span><span class="t-lbl">Réponse garantie</span></div>
+  <div class="trust-item"><span class="t-num">0€</span><span class="t-lbl">Devis & déplacement</span></div>
+  <div class="trust-item"><span class="t-num">95</span><span class="t-lbl">Val-d'Oise</span></div>
+</div>
+```
+
+  </section>
+
+  <!-- PROCESSUS -->
+
+  <section class="section section-creme">
+    <div style="text-align:center;margin-bottom:52px;">
+      <span class="chip chip-vert">Comment ça marche</span>
+      <h2>Un accompagnement de A à Z</h2>
+      <p class="s-intro" style="margin:10px auto 0;text-align:center;">De votre première demande jusqu'à la fin du chantier, on est là.</p>
+    </div>
+    <div class="process-wrap">
+      <div class="p-step reveal"><div class="p-num">1</div><h3>Devis gratuit</h3><p>Nous nous déplaçons gratuitement pour évaluer votre projet et établir un prix précis.</p></div>
+      <div class="p-step reveal reveal-delay-1"><div class="p-num">2</div><h3>Planification</h3><p>On fixe ensemble la date selon vos contraintes et nos disponibilités.</p></div>
+      <div class="p-step reveal reveal-delay-2"><div class="p-num">3</div><h3>Intervention</h3><p>Notre équipe réalise les travaux avec ponctualité et le matériel adapté.</p></div>
+      <div class="p-step reveal reveal-delay-3"><div class="p-num">4</div><h3>Résultat propre</h3><p>Nettoyage complet, évacuation des déchets. Vous n'avez rien à gérer.</p></div>
+    </div>
+  </section>
+
+  <!-- AVIS ACCUEIL -->
+
+  <section class="section">
+    <span class="chip chip-marron">Avis clients</span>
+    <div class="avis-top">
+      <div class="avis-score-box">
+        <div class="n">4,8/5</div>
+        <div class="s">★★★★★</div>
+        <div class="l">Satisfaction</div>
+      </div>
+      <div>
+        <h2 style="color:#555;">Ce que disent nos clients</h2>
+        <p style="font-size:.9rem;color:#888;margin-top:6px;">Des particuliers du Val-d'Oise qui nous font confiance.</p>
+      </div>
+    </div>
+    <!-- GRILLE VIDE : remplie par JS sans doublons -->
+    <div class="avis-grid" id="avis-grid"></div>
+
+```
+<!-- FORMULAIRE AVIS -->
+<div style="margin-top:52px;background:var(--creme-dark);border-radius:16px;padding:36px;border:1.5px solid var(--creme-deep);">
+  <h3 style="margin-bottom:6px;font-size:1.1rem;">Laissez votre avis</h3>
+  <p style="font-size:.83rem;color:var(--texte-doux);margin-bottom:24px;">Votre expérience compte pour nous et aide d'autres clients.</p>
+  <div style="margin-bottom:18px;">
+    <label style="display:block;font-size:.7rem;font-weight:800;letter-spacing:.09em;text-transform:uppercase;color:#444;margin-bottom:10px;">Votre note</label>
+    <div id="star-selector" style="display:flex;gap:6px;font-size:2rem;cursor:pointer;">
+      <span onclick="setStars(1)" style="color:#ccc;transition:.2s;">☆</span>
+      <span onclick="setStars(2)" style="color:#ccc;transition:.2s;">☆</span>
+      <span onclick="setStars(3)" style="color:#ccc;transition:.2s;">☆</span>
+      <span onclick="setStars(4)" style="color:#ccc;transition:.2s;">☆</span>
+      <span onclick="setStars(5)" style="color:#ccc;transition:.2s;">☆</span>
+    </div>
+  </div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px;">
+    <div class="fg" style="margin:0;"><label>Prénom & Initiale</label><input type="text" id="avis-nom" placeholder="ex: Marie T."/></div>
+    <div class="fg" style="margin:0;"><label>Ville</label><input type="text" id="avis-ville" placeholder="ex: Taverny"/></div>
+  </div>
+  <div class="fg"><label>Votre commentaire</label><textarea id="avis-texte" placeholder="Décrivez votre expérience avec RBC Solution…" style="min-height:90px;"></textarea></div>
+  <button class="btn btn-vert" onclick="soumettreAvis()">Publier mon avis →</button>
+  <div id="avis-confirm" style="display:none;margin-top:14px;background:var(--vert-pale);color:var(--vert);padding:12px 18px;border-radius:8px;font-size:.88rem;font-weight:700;border:1.5px solid var(--vert-light);">
+    ✓ Merci pour votre avis ! Il est maintenant visible sur le site.
+  </div>
+</div>
+```
+
+  </section>
+
+  <div class="cta-strip">
+    <h2>Prêt à démarrer votre projet ?</h2>
+    <p>Devis gratuit, déplacement offert. Réponse sous 24h dans tout le Val-d'Oise.</p>
+    <div class="cta-btns">
+      <button class="btn btn-creme" onclick="goPage('contact')">Demander un devis gratuit →</button>
+      <a href="tel:0768582562" class="btn btn-outline-blanc">📞 07 68 58 25 62</a>
+    </div>
+    <div class="cta-badges">
+      <span class="cta-badge">✓ Devis gratuit & sans engagement</span>
+      <span class="cta-badge">✓ Déplacement offert</span>
+      <span class="cta-badge">✓ Réponse sous 24h</span>
+      <span class="cta-badge">✓ Matériel professionnel</span>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════
+     PAGE : SERVICES VERT
+═══════════════════════════════════ -->
+
+<div id="page-services-vert" class="page">
+  <section class="section" style="background:linear-gradient(180deg,#eef5e8 0%,var(--creme) 100%);">
+    <button onclick="goPage('accueil')" style="background:none;border:none;cursor:pointer;color:var(--texte-doux);font-size:.8rem;font-weight:700;font-family:'Raleway',sans-serif;margin-bottom:16px;display:flex;align-items:center;gap:5px;">← Retour</button>
+    <span class="chip chip-vert">🌿 RBC Solution Vert</span>
+    <h2 style="color:var(--vert);">Jardinage & Espaces verts</h2>
+    <p class="s-intro">Entretien, aménagement et rénovation extérieure dans le Val-d'Oise. Devis gratuit, déplacement offert.</p>
+    <div class="svc-grid">
+      <div class="svc-card g au d1 reveal" onclick="devis('Tonte & entretien de jardin')" style="cursor:pointer;"><div class="ico">✂️</div><h3>Tonte & entretien pelouse</h3><p>Tonte régulière, ramassage des déchets, fertilisation. Un gazon impeccable toute l'année.</p><div class="svc-cta">Demander un devis →</div></div>
+      <div class="svc-card g au d2 reveal reveal-delay-1" onclick="devis('Taille de haies / arbustes')" style="cursor:pointer;"><div class="ico">🌳</div><h3>Taille de haies & arbustes</h3><p>Taille précise, entretien des bordures, formation des arbustes et arbres fruitiers.</p><div class="svc-cta">Demander un devis →</div></div>
+      <div class="svc-card g au d3 reveal reveal-delay-2" onclick="devis('Aménagement paysager')" style="cursor:pointer;"><div class="ico">🪨</div><h3>Aménagement paysager</h3><p>Création de massifs, plantation, pose de clôtures, dallage, allées et terrasses.</p><div class="svc-cta">Demander un devis →</div></div>
+      <div class="svc-card g au d4 reveal reveal-delay-3" onclick="devis('Rénovation extérieure')" style="cursor:pointer;"><div class="ico">🏗️</div><h3>Rénovation extérieure</h3><p>Ravalement de façade, nettoyage haute pression, remise en état clôtures et murets.</p><div class="svc-cta">Demander un devis →</div></div>
+      <div class="svc-card g au d5 reveal reveal-delay-1" onclick="devis('Nettoyage / désherbage')" style="cursor:pointer;"><div class="ico">🍂</div><h3>Nettoyage & désherbage</h3><p>Évacuation feuilles mortes, démoussage, traitement des mauvaises herbes.</p><div class="svc-cta">Demander un devis →</div></div>
+      <div class="svc-card g au d6 reveal reveal-delay-2" onclick="devis('Arrosage & entretien saisonnier')" style="cursor:pointer;"><div class="ico">💧</div><h3>Arrosage & saisonnier</h3><p>Systèmes d'arrosage, préparation hivernale, plantation de saison.</p><div class="svc-cta">Demander un devis →</div></div>
+    </div>
+    <div style="text-align:center;margin-top:52px;display:flex;gap:14px;justify-content:center;flex-wrap:wrap;">
+      <button class="btn btn-vert" onclick="goPage('contact')">Demander un devis →</button>
+      <button class="btn btn-marron" onclick="goPage('services-solution')">Voir RBC Solution Renouveau 🔄</button>
+    </div>
+  </section>
+</div>
+
+<!-- ══════════════════════════════════
+     PAGE : SERVICES SOLUTION
+═══════════════════════════════════ -->
+
+<div id="page-services-solution" class="page">
+  <section class="section" style="background:linear-gradient(180deg,#f7f0e8 0%,var(--creme) 100%);">
+    <button onclick="goPage('accueil')" style="background:none;border:none;cursor:pointer;color:var(--texte-doux);font-size:.8rem;font-weight:700;font-family:'Raleway',sans-serif;margin-bottom:16px;display:flex;align-items:center;gap:5px;">← Retour</button>
+    <span class="chip chip-marron">🔄 RBC Solution Renouveau</span>
+    <h2 style="color:var(--marron);">Débarras & Déménagement</h2>
+    <p class="s-intro">Débarras, déménagement, syndrome de Diogène et remise en état locatif dans le Val-d'Oise.</p>
+    <div class="svc-grid">
+      <div class="svc-card m au d1 reveal" onclick="devis('Débarras')" style="cursor:pointer;"><div class="ico">🏠</div><h3>Débarras complet</h3><p>Vider maison, appartement, cave ou grenier encombré. Tri et évacuation inclus.</p><div class="svc-cta svc-cta-m">Demander un devis →</div></div>
+      <div class="svc-card m au d2 reveal reveal-delay-1" onclick="devis('Déménagement')" style="cursor:pointer;"><div class="ico">📦</div><h3>Déménagement</h3><p>Transport sécurisé de vos meubles et cartons, emballage et installation inclus.</p><div class="svc-cta svc-cta-m">Demander un devis →</div></div>
+      <div class="svc-card m au d3 reveal reveal-delay-2" onclick="devis('Syndrome de Diogène')" style="cursor:pointer;"><div class="ico">🧹</div><h3>Syndrome de Diogène</h3><p>Intervention spécialisée et bienveillante pour logements encombrés à l'extrême. Discrétion totale.</p><div class="svc-cta svc-cta-m">Demander un devis →</div></div>
+      <div class="svc-card m au d4 reveal reveal-delay-3" onclick="devis('Remise en état locatif')" style="cursor:pointer;"><div class="ico">🔑</div><h3>Remise en état locatif</h3><p>Nettoyage approfondi et remise en état d'un logement entre deux locataires.</p><div class="svc-cta svc-cta-m">Demander un devis →</div></div>
+    </div>
+    <div style="text-align:center;margin-top:52px;display:flex;gap:14px;justify-content:center;flex-wrap:wrap;">
+      <button class="btn btn-marron" onclick="goPage('contact')">Demander un devis →</button>
+      <button class="btn btn-vert" onclick="goPage('services-vert')">Voir RBC Solution Vert 🌿</button>
+    </div>
+  </section>
+</div>
+
+<!-- ══════════════════════════════════
+     PAGE : RÉALISATIONS
+═══════════════════════════════════ -->
+
+<div id="page-realisations" class="page">
+  <section class="section">
+    <span class="chip chip-vert">Réalisations</span>
+    <h2>Nos réalisations</h2>
+    <p class="s-intro">Chantiers réalisés dans le Val-d'Oise. Chaque résultat est visible dès la fin de l'intervention.</p>
+
+```
+<!-- Grille galerie — remplie dynamiquement -->
+<div id="galerie-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px;margin-top:10px;"></div>
+
+<!-- Pour ajouter des photos : modifiez GALERIE_PHOTOS dans le JS ci-dessous -->
+<div style="margin-top:24px;padding:16px 20px;background:var(--vert-pale);border-radius:10px;border:1.5px solid var(--vert-light);font-size:.82rem;color:var(--vert);font-weight:600;">
+  📁 Pour ajouter vos photos : placez-les dans un dossier <strong>photos/</strong> et ajoutez une ligne dans <strong>GALERIE_PHOTOS</strong> dans le code.
+</div>
+```
+
+  </section>
+
+  <section class="section section-marron-pale" style="padding-top:65px;padding-bottom:70px;">
+    <span class="chip chip-marron">Témoignages</span>
+    <h2>La parole à nos clients</h2>
+    <div class="avis-grid" style="margin-top:38px;">
+      <div class="avis-card"><div class="avis-stars">★★★★★</div><p>"Jardin entièrement refait, résultat impeccable. Équipe sérieuse et ponctuelle."</p><div class="avis-author"><div class="avis-av">MT</div><div><div class="avis-name">Marie T.</div><div class="avis-ville">Val-d'Oise</div></div></div></div>
+      <div class="avis-card"><div class="avis-stars">★★★★★</div><p>"Débarras d'une maison de famille en une journée. Efficaces, discrets, respectueux."</p><div class="avis-author"><div class="avis-av">JL</div><div><div class="avis-name">Jean-Pierre L.</div><div class="avis-ville">Val-d'Oise</div></div></div></div>
+      <div class="avis-card"><div class="avis-stars">★★★★★</div><p>"Intervention Diogène parfaitement gérée. Discrétion et résultat méconnaissable."</p><div class="avis-author"><div class="avis-av">PB</div><div><div class="avis-name">Patricia B.</div><div class="avis-ville">Val-d'Oise</div></div></div></div>
+    </div>
+  </section>
+</div>
+
+<!-- ══════════════════════════════════
+     PAGE : CONTACT
+═══════════════════════════════════ -->
+
+<div id="page-contact" class="page">
+  <section class="section">
+    <span class="chip chip-vert">Nous contacter</span>
+    <h2>Demandez votre devis gratuit</h2>
+    <p class="s-intro">Réponse garantie sous 24h. Déplacement gratuit pour estimation sur place.</p>
+    <div class="contact-grid">
+      <div class="contact-infos">
+        <div class="c-row"><div class="c-ico">📞</div><div><h4>Téléphone</h4><p><a href="tel:0768582562" style="color:#fff;">07 68 58 25 62</a></p></div></div>
+        <div class="c-row"><div class="c-ico">📧</div><div><h4>Email</h4><p style="font-size:.82rem;">rbcsolutioncontact@gmail.com</p></div></div>
+        <div class="c-row"><div class="c-ico">📍</div><div><h4>Zone d'intervention</h4><p>Val-d'Oise (95)</p></div></div>
+        <div class="c-row"><div class="c-ico">🕐</div><div><h4>Disponibilité</h4><p>Lun – Sam : 8h – 19h</p></div></div>
+        <div class="c-row">
+          <div class="c-ico">📱</div>
+          <div>
+            <h4>Réseaux sociaux</h4>
+            <a href="https://www.instagram.com/rbc.solution" target="_blank" style="display:flex;align-items:center;gap:6px;color:var(--vert);font-weight:700;font-size:.88rem;margin-bottom:8px;">📸 Instagram @rbc.solution</a>
+            <a href="https://www.tiktok.com/@rbc.solution" target="_blank" style="display:flex;align-items:center;gap:6px;color:#1a1a1a;font-weight:700;font-size:.88rem;">🎵 TikTok @rbc.solution</a>
+          </div>
+        </div>
+        <div class="etapes-box">
+          <h3>En 3 étapes simples</h3>
+          <p><strong>1.</strong> Vous remplissez le formulaire<br><strong>2.</strong> On vous rappelle sous 24h<br><strong>3.</strong> Déplacement gratuit & devis sur place</p>
+        </div>
+      </div>
+      <div class="form-box">
+        <h3 style="margin-bottom:22px;font-size:1.05rem;">Votre demande</h3>
+        <form action="https://formspree.io/f/mbdqkjpl" method="POST">
+          <div class="form-row2">
+            <div class="fg"><label>Prénom</label><input type="text" name="prenom" placeholder="Jean" required/></div>
+            <div class="fg"><label>Nom</label><input type="text" name="nom" placeholder="Dupont" required/></div>
+          </div>
+          <div class="fg"><label>Téléphone</label><input type="tel" name="telephone" placeholder="07 00 00 00 00" required/></div>
+          <div class="fg"><label>Email</label><input type="email" name="email" placeholder="jean@email.com" required/></div>
+          <div class="fg">
+            <label>Services souhaités</label>
+            <div style="background:var(--creme);border:1.5px solid var(--creme-deep);border-radius:8px;padding:14px 16px;display:flex;flex-direction:column;gap:8px;">
+              <div style="font-size:.7rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:#888;margin-bottom:2px;">🌿 RBC Solution Vert</div>
+              <label style="display:flex;align-items:center;gap:10px;font-size:.88rem;font-weight:500;cursor:pointer;text-transform:none;letter-spacing:0;"><input type="checkbox" name="service" value="Tonte & entretien de jardin" style="accent-color:var(--vert);width:16px;height:16px;"/> Tonte & entretien de jardin</label>
+              <label style="display:flex;align-items:center;gap:10px;font-size:.88rem;font-weight:500;cursor:pointer;text-transform:none;letter-spacing:0;"><input type="checkbox" name="service" value="Taille de haies / arbustes" style="accent-color:var(--vert);width:16px;height:16px;"/> Taille de haies / arbustes</label>
+              <label style="display:flex;align-items:center;gap:10px;font-size:.88rem;font-weight:500;cursor:pointer;text-transform:none;letter-spacing:0;"><input type="checkbox" name="service" value="Aménagement paysager" style="accent-color:var(--vert);width:16px;height:16px;"/> Aménagement paysager</label>
+              <label style="display:flex;align-items:center;gap:10px;font-size:.88rem;font-weight:500;cursor:pointer;text-transform:none;letter-spacing:0;"><input type="checkbox" name="service" value="Rénovation extérieure" style="accent-color:var(--vert);width:16px;height:16px;"/> Rénovation extérieure</label>
+              <label style="display:flex;align-items:center;gap:10px;font-size:.88rem;font-weight:500;cursor:pointer;text-transform:none;letter-spacing:0;"><input type="checkbox" name="service" value="Nettoyage / désherbage" style="accent-color:var(--vert);width:16px;height:16px;"/> Nettoyage / désherbage</label>
+              <label style="display:flex;align-items:center;gap:10px;font-size:.88rem;font-weight:500;cursor:pointer;text-transform:none;letter-spacing:0;"><input type="checkbox" name="service" value="Autre projet Vert" style="accent-color:var(--vert);width:16px;height:16px;"/> Autre projet Vert</label>
+              <div style="font-size:.7rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:#888;margin:6px 0 2px;">🔄 RBC Solution Renouveau</div>
+              <label style="display:flex;align-items:center;gap:10px;font-size:.88rem;font-weight:500;cursor:pointer;text-transform:none;letter-spacing:0;"><input type="checkbox" name="service" value="Débarras" style="accent-color:var(--vert);width:16px;height:16px;"/> Débarras</label>
+              <label style="display:flex;align-items:center;gap:10px;font-size:.88rem;font-weight:500;cursor:pointer;text-transform:none;letter-spacing:0;"><input type="checkbox" name="service" value="Déménagement" style="accent-color:var(--vert);width:16px;height:16px;"/> Déménagement</label>
+              <label style="display:flex;align-items:center;gap:10px;font-size:.88rem;font-weight:500;cursor:pointer;text-transform:none;letter-spacing:0;"><input type="checkbox" name="service" value="Syndrome de Diogène" style="accent-color:var(--vert);width:16px;height:16px;"/> Syndrome de Diogène</label>
+              <label style="display:flex;align-items:center;gap:10px;font-size:.88rem;font-weight:500;cursor:pointer;text-transform:none;letter-spacing:0;"><input type="checkbox" name="service" value="Remise en état locatif" style="accent-color:var(--vert);width:16px;height:16px;"/> Remise en état locatif</label>
+            </div>
+          </div>
+          <div class="fg"><label>Votre ville</label><input type="text" name="ville" placeholder="Val-d'Oise…"/></div>
+          <div class="fg"><label>Description du projet</label><textarea name="message" placeholder="Décrivez brièvement votre besoin…"></textarea></div>
+          <button type="submit" class="btn btn-vert" style="width:100%;">Envoyer ma demande →</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-creme" style="padding-top:65px;padding-bottom:70px;">
+    <span class="chip chip-vert">Zone d'intervention</span>
+    <h2>Nous intervenons dans tout le Val-d'Oise</h2>
+    <div class="zone-grid" style="margin-top:40px;">
+      <div class="zone-map">🗺️</div>
+      <div>
+        <h3 style="margin-bottom:14px;">Val-d'Oise & environs</h3>
+        <p style="font-size:.95rem;color:var(--texte-doux);line-height:1.9;margin-bottom:22px;">Nous intervenons dans tout le <strong style="color:var(--vert);">Val-d'Oise (95)</strong> et ses environs. N'hésitez pas à nous contacter pour savoir si nous intervenons dans votre commune.</p>
+        <div class="zone-note">📞 Contactez-nous pour plus d'infos sur notre zone d'intervention.</div>
+        <div style="margin-top:22px;"><button class="btn btn-vert" onclick="document.querySelector('.form-box')?.scrollIntoView({behavior:'smooth',block:'center'})">Nous contacter →</button></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" style="background:var(--marron-pale);">
+    <div style="text-align:center;margin-bottom:44px;">
+      <span class="chip chip-marron">Questions fréquentes</span>
+      <h2>On répond à vos questions</h2>
+    </div>
+    <div class="faq-wrap">
+      <div class="faq-item reveal"><div class="faq-q" onclick="faq(this)"><span>Les devis sont-ils vraiment gratuits ?</span><span class="faq-ico">+</span></div><div class="faq-a">Oui, totalement gratuits et sans engagement. Nous nous déplaçons sur place pour évaluer votre projet avant de vous proposer un prix. Aucun frais caché, aucune surprise.</div></div>
+      <div class="faq-item reveal"><div class="faq-q" onclick="faq(this)"><span>Quels sont vos délais d'intervention ?</span><span class="faq-ico">+</span></div><div class="faq-a">Nous répondons sous 24h après votre demande. Pour un devis précis, nous organisons une visite sur site sous 48 à 72h selon nos disponibilités.</div></div>
+      <div class="faq-item reveal"><div class="faq-q" onclick="faq(this)"><span>Intervenez-vous partout dans le Val-d'Oise ?</span><span class="faq-ico">+</span></div><div class="faq-a">Nous intervenons dans tout le Val-d'Oise (95) et ses environs. Contactez-nous pour vérifier votre secteur.</div></div>
+      <div class="faq-item reveal"><div class="faq-q" onclick="faq(this)"><span>Évacuez-vous les déchets après le chantier ?</span><span class="faq-ico">+</span></div><div class="faq-a">Oui, le nettoyage complet et l'évacuation des déchets sont inclus dans chaque intervention. Vous n'avez rien à gérer.</div></div>
+      <div class="faq-item reveal"><div class="faq-q" onclick="faq(this)"><span>Puis-je avoir un entretien régulier de mon jardin ?</span><span class="faq-ico">+</span></div><div class="faq-a">Absolument. Nous proposons des passages réguliers (hebdomadaires, bimensuels ou mensuels) adaptés à votre jardin et votre budget.</div></div>
+      <div class="faq-item reveal"><div class="faq-q" onclick="faq(this)"><span>Faites-vous les débarras complets de maison ?</span><span class="faq-ico">+</span></div><div class="faq-a">Oui, c'est l'une de nos spécialités. Nous vidons entièrement maisons, appartements, caves et greniers, avec tri sélectif et évacuation inclus.</div></div>
+    </div>
+  </section>
+</div>
+
+<!-- ══════════════════════════════════
+     PAGE : À PROPOS
+═══════════════════════════════════ -->
+
+<div id="page-apropos" class="page">
+  <section class="section">
+    <div class="ap-grid">
+      <div class="ap-vis">
+        <div class="ap-img">🌿</div>
+        <div class="ap-badge"><strong>RBC</strong><span>Solution</span></div>
+      </div>
+      <div class="ap-txt">
+        <span class="chip chip-vert">Notre histoire</span>
+        <h2>Une entreprise familiale ancrée dans le Val-d'Oise</h2>
+        <p>RBC Solution est née dans le Val-d'Oise d'une passion simple : le travail bien fait, avec des résultats concrets et visibles dès la fin du chantier.</p>
+        <p>Nous intervenons sur deux activités complémentaires : l'entretien des espaces verts & rénovation extérieure, et le débarras & déménagement.</p>
+        <div class="ap-vals">
+          <div class="ap-val reveal"><h4>🌿 Passion</h4><p>Les espaces verts sont notre cœur de métier.</p></div>
+          <div class="ap-val reveal"><h4>🤝 Transparence</h4><p>Devis clair, aucun frais caché.</p></div>
+          <div class="ap-val reveal"><h4>⚡ Réactivité</h4><p>Réponse sous 24h, intervention rapide.</p></div>
+          <div class="ap-val reveal"><h4>📍 Proximité</h4><p>Locaux, on connaît nos clients.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <div class="cta-strip">
+    <h2>Travaillons ensemble</h2>
+    <p>Un projet en tête ? Contactez-nous pour un devis gratuit et sans engagement.</p>
+    <div class="cta-btns">
+      <button class="btn btn-creme" onclick="goPage('contact')">Demander un devis →</button>
+      <a href="tel:0768582562" class="btn btn-outline-blanc">📞 07 68 58 25 62</a>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+
+<footer>
+  <div class="footer-main">
+    <div class="f-brand">
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px;">
+        <svg viewBox="0 0 68 68" width="48" height="48" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="34" cy="34" r="30" fill="none" stroke="rgba(255,255,255,.3)" stroke-width="4"/>
+          <circle cx="34" cy="34" r="22" fill="none" stroke="rgba(45,90,27,.6)" stroke-width="1.5" stroke-dasharray="5 3"/>
+          <polygon points="34,6 29,34 34,30 39,34" fill="#3d7825"/>
+          <polygon points="34,62 29,34 34,38 39,34" fill="rgba(255,255,255,.35)"/>
+          <polygon points="62,34 34,29 38,34 34,39" fill="rgba(255,255,255,.25)"/>
+          <polygon points="6,34 34,29 30,34 34,39" fill="rgba(255,255,255,.25)"/>
+          <circle cx="34" cy="34" r="4.5" fill="#1a1208" stroke="rgba(255,255,255,.3)" stroke-width="1.5"/>
+        </svg>
+        <div style="line-height:1.15;">
+          <div><span style="font-family:'Raleway',sans-serif;font-weight:800;font-size:1.15rem;color:#a8d48a;">RBC</span><span style="font-family:'Raleway',sans-serif;font-weight:700;font-size:1.15rem;color:rgba(245,239,228,.75);"> SOLUTION</span></div>
+          <span style="font-family:'Lora',serif;font-size:.58rem;color:rgba(245,239,228,.35);letter-spacing:.1em;font-style:italic;">Un problème ? Une solution.</span>
+        </div>
+      </div>
+      <p style="font-size:.8rem;line-height:1.75;max-width:270px;">Jardinage, rénovation extérieure, débarras et déménagement dans le Val-d'Oise. Devis gratuit, intervention rapide.</p>
+    </div>
+    <div class="f-col">
+      <h4>Navigation</h4>
+      <ul>
+        <li><a onclick="goPage('accueil')">Accueil</a></li>
+        <li><a onclick="goPage('services-vert')">🌿 Solution Vert</a></li>
+        <li><a onclick="goPage('services-solution')">🔄 Solution Renouveau</a></li>
+        <li><a onclick="goPage('realisations')">Réalisations</a></li>
+        <li><a onclick="goPage('apropos')">À propos</a></li>
+        <li><a onclick="goPage('contact')">Contact</a></li>
+      </ul>
+    </div>
+    <div class="f-col">
+      <h4>Contact</h4>
+      <ul>
+        <li><a>📍 Val-d'Oise (95)</a></li>
+        <li><a href="tel:0768582562">📞 07 68 58 25 62</a></li>
+        <li><a style="font-size:.72rem;">rbcsolutioncontact@gmail.com</a></li>
+        <li><a onclick="goPage('contact')">Devis gratuit →</a></li>
+      </ul>
+    </div>
+    <div class="f-col">
+      <h4>Réseaux</h4>
+      <ul>
+        <li><a href="https://www.instagram.com/rbc.solution" target="_blank">📸 Instagram</a></li>
+        <li><a href="https://www.tiktok.com/@rbc.solution" target="_blank">🎵 TikTok</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-btm">
+    <span>© 2025 RBC Solution · Val-d'Oise (95)</span>
+    <em>Un problème ? Une solution.</em>
+  </div>
+</footer>
+
+<script>
+function goPage(id, el) {
+  var pages = document.querySelectorAll('.page');
+  for (var i = 0; i < pages.length; i++) pages[i].classList.remove('active');
+  document.getElementById('page-' + id).classList.add('active');
+  var links = document.querySelectorAll('.nav-links a');
+  for (var i = 0; i < links.length; i++) links[i].classList.remove('active');
+  if (el) el.classList.add('active');
+  window.scrollTo(0, 0);
+  document.getElementById('mobMenu').classList.remove('open');
+  if (id === 'realisations') chargerGalerie();
+}
+function toggleBurger() {
+  document.getElementById('mobMenu').classList.toggle('open');
+}
+function faq(el) {
+  var a = el.nextElementSibling;
+  var isOpen = el.classList.contains('open');
+  var qs = document.querySelectorAll('.faq-q');
+  var as = document.querySelectorAll('.faq-a');
+  for (var i = 0; i < qs.length; i++) qs[i].classList.remove('open');
+  for (var i = 0; i < as.length; i++) as[i].classList.remove('open');
+  if (!isOpen) { el.classList.add('open'); a.classList.add('open'); }
+}
+function devis(prestation) {
+  goPage('contact');
+  setTimeout(function() {
+    var boxes = document.querySelectorAll('#page-contact input[type="checkbox"]');
+    for (var i = 0; i < boxes.length; i++) boxes[i].checked = (boxes[i].value === prestation);
+    var form = document.querySelector('.form-box');
+    if (form) form.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }, 150);
+}
+
+// AVIS
+var AVIS_BASE = [
+  { nom: 'Marie T.', ville: "Val-d'Oise", texte: "Jardin entièrement refait, résultat impeccable. Équipe sérieuse et ponctuelle. Je recommande vivement !", note: 5 },
+  { nom: 'Jean-Pierre L.', ville: "Val-d'Oise", texte: "Débarras d'une maison de famille fait en une journée. Efficaces, discrets et respectueux. Merci !", note: 5 },
+  { nom: 'Sophie M.', ville: "Val-d'Oise", texte: "Bon travail dans l'ensemble, haies bien taillées et gazon propre. Équipe sérieuse et réactive. On refera appel à eux.", note: 4 },
+  { nom: 'Patricia B.', ville: "Val-d'Oise", texte: "Intervention pour un logement en syndrome de Diogène. Professionnalisme et discrétion exemplaires. Le logement est méconnaissable. Un grand merci.", note: 5 }
+];
+var selectedStars = 0;
+function setStars(val) {
+  selectedStars = val;
+  var spans = document.querySelectorAll('#star-selector span');
+  for (var i = 0; i < spans.length; i++) {
+    spans[i].textContent = i < val ? '★' : '☆';
+    spans[i].style.color = i < val ? '#c8860a' : '#ccc';
+  }
+}
+function starsHtml(n) {
+  var s = '';
+  for (var i = 0; i < 5; i++) s += i < n ? '★' : '☆';
+  return s;
+}
+function initiales(nom) {
+  var parts = nom.trim().split(' ');
+  var result = '';
+  for (var i = 0; i < parts.length; i++) { if (parts[i][0]) result += parts[i][0].toUpperCase(); }
+  return result.slice(0, 2);
+}
+function afficherNouvelAvis(avis) {
+  var grid = document.getElementById('avis-grid');
+  if (!grid) return;
+  var card = document.createElement('div');
+  card.className = 'avis-card';
+  card.innerHTML = '<div class="avis-stars">' + starsHtml(avis.note) + '</div>'
+    + '<p>"' + avis.texte + '"</p>'
+    + '<div class="avis-author">'
+    + '<div class="avis-av">' + initiales(avis.nom) + '</div>'
+    + '<div><div class="avis-name">' + avis.nom + '</div><div class="avis-ville">' + avis.ville + '</div></div>'
+    + '</div>';
+  grid.appendChild(card);
+}
+function chargerAvis() {
+  try {
+    var raw = localStorage.getItem('rbc-avis');
+    var liste = raw ? JSON.parse(raw) : [];
+    if (liste.length === 0) {
+      localStorage.setItem('rbc-avis', JSON.stringify(AVIS_BASE));
+      for (var i = 0; i < AVIS_BASE.length; i++) afficherNouvelAvis(AVIS_BASE[i]);
+    } else {
+      for (var i = 0; i < liste.length; i++) afficherNouvelAvis(liste[i]);
+    }
+  } catch(e) {
+    for (var i = 0; i < AVIS_BASE.length; i++) afficherNouvelAvis(AVIS_BASE[i]);
+  }
+}
+function soumettreAvis() {
+  var nom = document.getElementById('avis-nom').value.trim();
+  var ville = document.getElementById('avis-ville').value.trim() || "Val-d'Oise";
+  var texte = document.getElementById('avis-texte').value.trim();
+  if (!nom || !texte || selectedStars === 0) { alert('Merci de remplir votre nom, note et commentaire.'); return; }
+  var avis = { nom: nom, ville: ville, texte: texte, note: selectedStars };
+  try {
+    var raw = localStorage.getItem('rbc-avis');
+    var liste = raw ? JSON.parse(raw) : [];
+    liste.push(avis);
+    localStorage.setItem('rbc-avis', JSON.stringify(liste));
+  } catch(e) {}
+  afficherNouvelAvis(avis);
+  document.getElementById('avis-nom').value = '';
+  document.getElementById('avis-ville').value = '';
+  document.getElementById('avis-texte').value = '';
+  setStars(0);
+  var c = document.getElementById('avis-confirm');
+  c.style.display = 'block';
+  setTimeout(function() { c.style.display = 'none'; }, 4000);
+}
+
+// GALERIE
+var GALERIE_PHOTOS = [
+  // { src: 'photos/photo1.jpg', label: 'Taille de haie - Taverny' },
+];
+var GALERIE_DEMO_COLORS = [
+  { label: 'Taille de haie', color: 'linear-gradient(135deg,#c8dab8,#e0ecd4)' },
+  { label: 'Demenagement', color: 'linear-gradient(135deg,#d4c4a0,#ede0c8)' },
+  { label: 'Renovation facade', color: 'linear-gradient(135deg,#c0d0b0,#d8e8c8)' },
+  { label: 'Debarras', color: 'linear-gradient(135deg,#ccc0a8,#e4d8c0)' },
+  { label: 'Jardinage', color: 'linear-gradient(135deg,#b8d4a8,#d6e8cc)' },
+  { label: 'Nettoyage', color: 'linear-gradient(135deg,#d0c4b8,#e8dcd0)' }
+];
+function chargerGalerie() {
+  var grid = document.getElementById('galerie-grid');
+  if (!grid) return;
+  grid.innerHTML = '';
+  if (GALERIE_PHOTOS.length === 0) {
+    for (var i = 0; i < GALERIE_DEMO_COLORS.length; i++) {
+      var item = GALERIE_DEMO_COLORS[i];
+      var div = document.createElement('div');
+      div.style.cssText = 'border-radius:14px;overflow:hidden;position:relative;height:180px;';
+      div.innerHTML = '<div style="background:' + item.color + ';width:100%;height:100%;"></div>'
+        + '<div style="position:absolute;bottom:0;left:0;right:0;padding:12px 16px;background:linear-gradient(transparent,rgba(30,20,10,.55));color:#fff;font-size:.78rem;font-weight:700;">' + item.label + '</div>';
+      grid.appendChild(div);
+    }
+  } else {
+    for (var j = 0; j < GALERIE_PHOTOS.length; j++) {
+      var photo = GALERIE_PHOTOS[j];
+      var pdiv = document.createElement('div');
+      pdiv.style.cssText = 'border-radius:14px;overflow:hidden;background:#f0ebe3;';
+      pdiv.innerHTML = '<img src="' + photo.src + '" alt="Realisation RBC Solution" style="width:100%;height:auto;display:block;"/>'
+        + (photo.label ? '<div style="padding:12px 16px;background:#ede4d6;font-size:.82rem;font-weight:700;color:#2c2318;">' + photo.label + '</div>' : '');
+      grid.appendChild(pdiv);
+    }
+  }
+}
+
+
+// PARALLAX HERO
+function initParallax() {
+  var hero = document.querySelector('.hero');
+  if (!hero) return;
+
+  function onScroll() {
+    var page = document.getElementById('page-accueil');
+    if (!page || page.style.display === 'none' || !page.classList.contains('active')) return;
+
+    var scrollY = window.pageYOffset;
+    var heroH = hero.offsetHeight;
+    if (scrollY > heroH) return;
+
+    var pct = scrollY / heroH;
+
+    var bg = document.getElementById('hero-bg');
+    var badge = document.getElementById('hero-badge');
+    var title = document.getElementById('hero-title');
+    var cards = document.getElementById('hero-cards');
+    var trust = document.getElementById('hero-trust');
+
+    if (bg)    bg.style.transform    = 'translateY(' + (scrollY * 0.15) + 'px)';
+    if (badge) badge.style.transform = 'translateY(' + (scrollY * -0.25) + 'px)';
+    if (title) title.style.transform = 'translateY(' + (scrollY * -0.18) + 'px)';
+    if (cards) cards.style.transform = 'translateY(' + (scrollY * 0.12) + 'px)';
+    if (trust) trust.style.transform = 'translateY(' + (scrollY * -0.08) + 'px)';
+
+    // Fade out hero content as user scrolls
+    var opacity = Math.max(0, 1 - pct * 1.8);
+    if (badge) badge.style.opacity = opacity;
+    if (title) title.style.opacity = opacity;
+    if (trust) trust.style.opacity = opacity;
+  }
+
+  window.addEventListener('scroll', onScroll, { passive: true });
+}
+// SCROLL REVEAL
+function initScrollReveal() {
+  var els = document.querySelectorAll('.reveal');
+  function check() {
+    var h = window.innerHeight;
+    for (var i = 0; i < els.length; i++) {
+      if (els[i].getBoundingClientRect().top < h - 60) els[i].classList.add('visible');
+    }
+  }
+  window.addEventListener('scroll', check, { passive: true });
+  check();
+}
+
+// COMPTEURS ANIMES
+function initCounters() {
+  var tnums = document.querySelectorAll('.t-num');
+  if (!tnums.length) return;
+  var triggered = false;
+  function check() {
+    if (triggered) return;
+    for (var i = 0; i < tnums.length; i++) {
+      if (tnums[i].getBoundingClientRect().top < window.innerHeight) {
+        triggered = true;
+        window.removeEventListener('scroll', check);
+        var data = [
+          { el: tnums[0], from: 0, to: 24, suffix: 'h', dur: 1200 },
+          { el: tnums[1], from: 0, to: 0, suffix: '€', dur: 600 },
+          { el: tnums[2], from: 80, to: 95, suffix: '', dur: 1000 }
+        ];
+        for (var j = 0; j < data.length; j++) {
+          (function(d) {
+            var start = null;
+            function step(ts) {
+              if (!start) start = ts;
+              var p = Math.min((ts - start) / d.dur, 1);
+              var ease = 1 - Math.pow(1 - p, 3);
+              d.el.textContent = Math.round(d.from + (d.to - d.from) * ease) + d.suffix;
+              if (p < 1) requestAnimationFrame(step);
+            }
+            requestAnimationFrame(step);
+          })(data[j]);
+        }
+        return;
+      }
+    }
+  }
+  window.addEventListener('scroll', check, { passive: true });
+  check();
+}
+
+// INIT
+window.onload = function() {
+  chargerAvis();
+  chargerGalerie();
+  initScrollReveal();
+  initCounters();
+  initParallax();
+};
+</script>
+
+</body>
+</html>
