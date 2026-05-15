@@ -189,7 +189,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(245,239,228,
   50%{transform:translateX(-50%) translateY(7px)}
 }
 /* Stats strip */
-.hero-trust{display:flex;gap:36px;flex-wrap:wrap;justify-content:center;padding:38px 8%;background:linear-gradient(135deg,#1e3d10,#2d5a1b);}
+.hero-trust{display:flex;gap:36px;flex-wrap:wrap;justify-content:center;padding:38px 8%;background:transparent;}
 .trust-item .t-num{font-family:'Lora',serif;font-size:2rem;font-weight:600;color:#c8e8a8;display:block}
 .trust-item .t-lbl{font-size:.68rem;color:rgba(255,255,255,.55);text-transform:uppercase;letter-spacing:.09em}
 @media(max-width:680px){
@@ -460,40 +460,39 @@ footer{background:#1a1208;color:rgba(245,239,228,.45)}
   </div>
 
 </section>
-```
 
-  </div>
-
-  <!-- TRUST STRIP -->
-
-  <div class="hero-trust">
+<!-- BOTTOM CONTENT qui monte pendant le scroll -->
+<div id="heroBottom" style="position:absolute;bottom:0;left:0;right:0;z-index:20;">
+  <div class="hero-trust" style="margin:0;">
     <div class="trust-item"><span class="t-num">24h</span><span class="t-lbl">R&#xE9;ponse garantie</span></div>
-    <div class="trust-item"><span class="t-num">0&euro;</span><span class="t-lbl">Devis & d&#xE9;placement</span></div>
+    <div class="trust-item"><span class="t-num">0&euro;</span><span class="t-lbl">Devis &amp; d&#xE9;placement</span></div>
     <div class="trust-item"><span class="t-num">95</span><span class="t-lbl">Val-d'Oise</span></div>
   </div>
-
   <!-- CARDS 2 P&#xD4;LES -->
-
   <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;padding:40px 8%;background:linear-gradient(150deg,#1e3d10 0%,#2d5a1b 50%,#3a4a20 100%);" class="hero-cards" id="hero-cards">
-    <div onclick="goPage('services-vert')" style="background:rgba(45,90,27,.6);border:2px solid rgba(200,232,168,.35);border-radius:18px;padding:36px 32px;cursor:pointer;transition:var(--t);"
-      onmouseover="this.style.transform='translateY(-5px)';this.style.background='rgba(45,90,27,.8)'"
-      onmouseout="this.style.transform='none';this.style.background='rgba(45,90,27,.6)'">
-      <div style="font-size:3.2rem;margin-bottom:16px;">&#x1F33F;</div>
-      <div style="font-size:.68rem;font-weight:800;letter-spacing:.15em;text-transform:uppercase;color:#c8e8a8;margin-bottom:10px;">P&#xF4;le Espaces Verts</div>
-      <h3 style="color:#fff;font-family:'Lora',serif;font-size:1.5rem;margin-bottom:12px;">RBC Solution Vert</h3>
-      <p style="color:rgba(255,255,255,.68);font-size:.88rem;line-height:1.7;">Jardinage &#xB7; Entretien &#xB7; Taille de haies &#xB7; Am&#xE9;nagement paysager &#xB7; R&#xE9;novation ext&#xE9;rieure</p>
-      <div style="margin-top:22px;font-size:.8rem;font-weight:800;color:#c8e8a8;letter-spacing:.08em;text-transform:uppercase;border-top:1px solid rgba(200,232,168,.2);padding-top:16px;">Voir les prestations &#x2192;</div>
-    </div>
-    <div onclick="goPage('services-solution')" style="background:rgba(107,68,35,.6);border:2px solid rgba(245,239,228,.2);border-radius:18px;padding:36px 32px;cursor:pointer;transition:var(--t);"
-      onmouseover="this.style.transform='translateY(-5px)';this.style.background='rgba(107,68,35,.8)'"
-      onmouseout="this.style.transform='none';this.style.background='rgba(107,68,35,.6)'">
-      <div style="font-size:3.2rem;margin-bottom:16px;">&#x1F69B;</div>
-      <div style="font-size:.68rem;font-weight:800;letter-spacing:.15em;text-transform:uppercase;color:#e8c898;margin-bottom:10px;">P&#xF4;le D&#xE9;barras & D&#xE9;m&#xE9;nagement</div>
-      <h3 style="color:#fff;font-family:'Lora',serif;font-size:1.5rem;margin-bottom:12px;">RBC Solution Renouveau</h3>
-      <p style="color:rgba(255,255,255,.68);font-size:.88rem;line-height:1.7;">D&#xE9;barras &#xB7; D&#xE9;m&#xE9;nagement &#xB7; Syndrome de Diog&#xE8;ne &#xB7; Remise en &#xE9;tat locatif</p>
-      <div style="margin-top:22px;font-size:.8rem;font-weight:800;color:#e8c898;letter-spacing:.08em;text-transform:uppercase;border-top:1px solid rgba(245,239,228,.15);padding-top:16px;">Voir les prestations &#x2192;</div>
-    </div>
-  </div>
+<div onclick="goPage('services-vert')" style="background:rgba(45,90,27,.6);border:2px solid rgba(200,232,168,.35);border-radius:18px;padding:36px 32px;cursor:pointer;transition:var(--t);"
+  onmouseover="this.style.transform='translateY(-5px)';this.style.background='rgba(45,90,27,.8)'"
+  onmouseout="this.style.transform='none';this.style.background='rgba(45,90,27,.6)'">
+  <div style="font-size:3.2rem;margin-bottom:16px;">&#x1F33F;</div>
+  <div style="font-size:.68rem;font-weight:800;letter-spacing:.15em;text-transform:uppercase;color:#c8e8a8;margin-bottom:10px;">P&#xF4;le Espaces Verts</div>
+  <h3 style="color:#fff;font-family:'Lora',serif;font-size:1.5rem;margin-bottom:12px;">RBC Solution Vert</h3>
+  <p style="color:rgba(255,255,255,.68);font-size:.88rem;line-height:1.7;">Jardinage &#xB7; Entretien &#xB7; Taille de haies &#xB7; Am&#xE9;nagement paysager &#xB7; R&#xE9;novation ext&#xE9;rieure</p>
+  <div style="margin-top:22px;font-size:.8rem;font-weight:800;color:#c8e8a8;letter-spacing:.08em;text-transform:uppercase;border-top:1px solid rgba(200,232,168,.2);padding-top:16px;">Voir les prestations &#x2192;</div>
+</div>
+<div onclick="goPage('services-solution')" style="background:rgba(107,68,35,.6);border:2px solid rgba(245,239,228,.2);border-radius:18px;padding:36px 32px;cursor:pointer;transition:var(--t);"
+  onmouseover="this.style.transform='translateY(-5px)';this.style.background='rgba(107,68,35,.8)'"
+  onmouseout="this.style.transform='none';this.style.background='rgba(107,68,35,.6)'">
+  <div style="font-size:3.2rem;margin-bottom:16px;">&#x1F69B;</div>
+  <div style="font-size:.68rem;font-weight:800;letter-spacing:.15em;text-transform:uppercase;color:#e8c898;margin-bottom:10px;">P&#xF4;le D&#xE9;barras & D&#xE9;m&#xE9;nagement</div>
+  <h3 style="color:#fff;font-family:'Lora',serif;font-size:1.5rem;margin-bottom:12px;">RBC Solution Renouveau</h3>
+  <p style="color:rgba(255,255,255,.68);font-size:.88rem;line-height:1.7;">D&#xE9;barras &#xB7; D&#xE9;m&#xE9;nagement &#xB7; Syndrome de Diog&#xE8;ne &#xB7; Remise en &#xE9;tat locatif</p>
+  <div style="margin-top:22px;font-size:.8rem;font-weight:800;color:#e8c898;letter-spacing:.08em;text-transform:uppercase;border-top:1px solid rgba(245,239,228,.15);padding-top:16px;">Voir les prestations &#x2192;</div>
+</div>
+</div><!-- /hero-cards -->
+</div><!-- /heroBottom -->
+```
+
+  </div><!-- /heroWrapper -->
 
   <!-- PROCESSUS -->
 
@@ -1002,6 +1001,7 @@ function initHeroReveal() {
   gsap.set('#labelApres',   { opacity: 0 });
   gsap.set('#labelAvant',   { opacity: 1 });
   gsap.set('#scrollHint',   { opacity: 1 });
+  gsap.set('#heroBottom',   { y: '100%' });
 
   // Timeline scrubb&#xE9;e sur le scroll
   var tl = gsap.timeline({
@@ -1029,7 +1029,10 @@ function initHeroReveal() {
     // D&#xE9;place la ligne de s&#xE9;paration de bas en haut
     .to('#heroDivider',  { top: '0%', ease: 'none', duration: 1 }, 0)
     // Bloc central dispara&#xEE;t d&#xE8;s le d&#xE9;but du scroll
-    .to('.hba-content',  { opacity: 0, ease: 'power1.in', duration: 0.3 }, 0)
+    .to('.hba-content',  { opacity: 0, ease: 'power1.in', duration: 0.3 }, 0);
+
+  // heroBottom monte à la fin du scroll
+  tl.to('#heroBottom', { y: '0%', ease: 'power2.out', duration: 0.3 }, 0.85);
 }
 
 // SCROLL REVEAL
@@ -1058,7 +1061,7 @@ function initCounters() {
         window.removeEventListener('scroll', check);
         var data = [
           { el: tnums[0], from: 0, to: 24, suffix: 'h', dur: 1200 },
-          { el: tnums[1], from: 0, to: 0, suffix: 'â‚¬', dur: 600 },
+          { el: tnums[1], from: 0, to: 0, suffix: '€', dur: 600 },
           { el: tnums[2], from: 80, to: 95, suffix: '', dur: 1000 }
         ];
         for (var j = 0; j < data.length; j++) {
