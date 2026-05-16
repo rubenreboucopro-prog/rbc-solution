@@ -1025,14 +1025,11 @@ function initHeroReveal() {
 
   tl
     // R&#xE9;v&#xE8;le l'image APR&#xC8;S de gauche &#xE0; droite
-    .to('#afterLayer',   { clipPath: 'inset(0% 0 0 0)', ease: 'none', duration: 1 }, 0)
-    // D&#xE9;place la ligne de s&#xE9;paration de bas en haut
-    .to('#heroDivider',  { top: '0%', ease: 'none', duration: 1 }, 0)
-    // Bloc central dispara&#xEE;t d&#xE8;s le d&#xE9;but du scroll
-    .to('.hba-content',  { opacity: 0, ease: 'power1.in', duration: 0.3 }, 0);
-
-  // heroBottom monte à la fin du scroll
-  tl.to('#heroBottom', { y: '0%', ease: 'power2.out', duration: 0.3 }, 0.85);
+    .to('#afterLayer',   { clipPath: 'inset(0% 0 0 0)', ease: 'none', duration: 0.5 }, 0)
+    .to('#heroDivider',  { top: '0%', ease: 'none', duration: 0.5 }, 0)
+    .to('.hba-content',  { opacity: 0, ease: 'power1.in', duration: 0.2 }, 0)
+    // heroBottom monte lentement dans la deuxi&#xE8;me partie
+    .to('#heroBottom',   { y: '0%', ease: 'power2.out', duration: 0.6 }, 0.45);
 }
 
 // SCROLL REVEAL
