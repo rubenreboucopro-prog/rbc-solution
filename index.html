@@ -9,6 +9,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;600;700;800&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
   <style>
@@ -37,9 +38,9 @@
 /* NAV */
 nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(245,239,228,.97);backdrop-filter:blur(16px);border-bottom:2px solid var(--creme-dark);height:80px;display:flex;align-items:center;justify-content:space-between;padding:0 5%}
 .nav-links{display:flex;gap:4px;list-style:none;align-items:center}
-.nav-links a{padding:8px 14px;border-radius:6px;font-size:.78rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--texte-doux);transition:var(--t);cursor:pointer}
+.nav-links a{padding:6px 10px;border-radius:6px;font-size:.72rem;font-weight:700;letter-spacing:.03em;text-transform:uppercase;color:var(--texte-doux);transition:var(--t);cursor:pointer;white-space:nowrap}
 .nav-links a:hover,.nav-links a.active{background:var(--vert-pale);color:var(--vert)}
-.nav-tel{background:var(--vert)!important;color:#fff!important;display:flex;align-items:center;gap:6px}
+.nav-tel{background:var(--vert)!important;color:#fff!important;display:flex;align-items:center;gap:6px;white-space:nowrap;font-family:'Courier New',monospace;letter-spacing:.1em;}
 .nav-tel:hover{background:var(--vert-mid)!important}
 .nav-devis{background:var(--marron)!important;color:#fff!important}
 .nav-devis:hover{opacity:.88!important}
@@ -47,7 +48,8 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(245,239,228,
 .burger span{width:24px;height:2px;background:var(--texte);border-radius:2px;transition:var(--t)}
 .mob-menu{display:none;flex-direction:column;position:fixed;top:80px;left:0;right:0;z-index:199;background:var(--creme);border-bottom:2px solid var(--creme-dark);padding:16px 5%;gap:4px}
 .mob-menu.open{display:flex}
-.mob-menu a{padding:12px 16px;border-radius:8px;font-size:.88rem;font-weight:700;text-transform:uppercase;color:var(--texte-doux);transition:var(--t);cursor:pointer}
+.mob-menu a{padding:12px 16px;border-radius:8px;font-size:.88rem;font-weight:700;text-transform:uppercase;color:var(--texte-doux);transition:var(--t);cursor:pointer;display:flex;align-items:center;gap:8px;}
+.mob-menu a i{font-size:.85rem;width:16px;text-align:center;}
 .mob-menu a:hover{background:var(--vert-pale);color:var(--vert)}
 
 /* BOUTONS */
@@ -163,10 +165,14 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(245,239,228,
   line-height:1.2;margin-bottom:12px;
   text-shadow:0 2px 20px rgba(0,0,0,.5);
 }
-.hba-content h1 em { color:#c8e8a8;font-style:normal; }
+.hba-content h1 { font-size:clamp(2rem,5vw,3.2rem); }
+.hba-content h1 em { background:linear-gradient(90deg,#c8893a 0%,#e8b87a 40%,#7cbb5a 75%,#4a9e2a 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;font-style:normal; }
+.hba-services { display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:6px 10px;margin:16px 0 14px;font-size:.72rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:rgba(255,255,255,.75); }
+.hba-services i { font-size:.68rem;margin-right:4px;color:#c8e8a8; }
+.hba-dot { color:rgba(255,255,255,.3); }
 .hba-content .hba-sub {
-  color:rgba(255,255,255,.65);font-size:.88rem;
-  line-height:1.72;margin-bottom:28px;
+  color:rgba(255,255,255,.55);font-size:.84rem;
+  line-height:1.72;margin-bottom:26px;
 }
 .hba-btns { display:flex;gap:12px;justify-content:center;flex-wrap:wrap; }
 /* Scroll hint */
@@ -208,7 +214,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(245,239,228,
 .svc-cta{margin-top:14px;font-size:.76rem;font-weight:800;letter-spacing:.07em;text-transform:uppercase;color:var(--vert);display:flex;align-items:center;gap:4px;border-top:1px solid var(--vert-light);padding-top:12px;transition:var(--t)}
 .svc-cta-m{color:var(--marron);border-top-color:var(--marron-light)}
 .svc-card:hover .svc-cta,.svc-card:hover .svc-cta-m{gap:8px}
-.svc-card .ico{font-size:2rem;margin-bottom:12px}
+.svc-card .ico{font-size:1.6rem;color:rgba(255,255,255,.6);margin-bottom:14px;}
 .svc-card h3{margin-bottom:8px}
 .svc-card p{font-size:.83rem;color:var(--texte-doux)}
 
@@ -256,28 +262,70 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(245,239,228,
 .cta-badge{background:rgba(245,239,228,.12);border:1px solid rgba(245,239,228,.2);color:rgba(255,255,255,.82);font-size:.72rem;font-weight:700;padding:6px 14px;border-radius:99px;letter-spacing:.05em}
 
 /* CONTACT */
-.contact-grid{display:grid;grid-template-columns:1fr 1.3fr;gap:60px;align-items:start}
-.contact-infos{display:flex;flex-direction:column;gap:20px}
-.c-row{display:flex;gap:16px;align-items:flex-start}
-.c-ico{width:50px;height:50px;border-radius:12px;flex-shrink:0;background:var(--vert-pale);display:flex;align-items:center;justify-content:center;font-size:1.3rem;border:1.5px solid var(--vert-light)}
-.c-row h4{font-family:'Raleway',sans-serif;font-size:.68rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:#2c2318;margin-bottom:3px}
-.c-row p{font-size:.92rem;font-weight:700;color:#2c2318}
-.etapes-box{background:var(--vert-pale);border-radius:12px;padding:22px;border:1.5px solid var(--vert-light)}
-.etapes-box h3{font-size:.95rem;margin-bottom:10px;color:#1a1a1a}
-.etapes-box p{font-size:.83rem;color:#444;line-height:1.85}
-.etapes-box strong{color:var(--vert)}
-.form-box{background:var(--blanc-chaud);border-radius:16px;padding:36px;box-shadow:var(--shadow-lg);border:1.5px solid var(--creme-dark)}
+.contact-hero{background:linear-gradient(135deg,#162c0e 0%,#2d5a1b 55%,#1c3a14 100%);padding:72px 8% 80px;text-align:center;position:relative;overflow:hidden}
+.contact-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 50% 100%,rgba(245,239,228,.06) 0%,transparent 70%);pointer-events:none}
+.contact-hero-inner{position:relative;z-index:1;max-width:580px;margin:0 auto}
+.chip-outline-creme{background:transparent;border:1.5px solid rgba(245,239,228,.35);color:rgba(245,239,228,.85);font-family:'Raleway',sans-serif;font-size:.62rem;font-weight:800;letter-spacing:.13em;text-transform:uppercase;padding:6px 16px;border-radius:99px;display:inline-block;margin-bottom:18px}
+.contact-hero-title{font-family:'Lora',serif;font-size:clamp(1.9rem,4vw,2.9rem);color:#f5efe4;margin-bottom:14px;line-height:1.2}
+.contact-hero-sub{font-size:.85rem;color:rgba(245,239,228,.68);letter-spacing:.04em}
+.contact-section-bg{background:linear-gradient(135deg,#3b2010 0%,#2e1f0e 25%,#1c3212 55%,#2d5a1b 100%);padding:70px 8%}
+.section-rbc-bg{background:linear-gradient(135deg,#3b2010 0%,#2e1f0e 25%,#1c3212 55%,#2d5a1b 100%)}
+.section-rbc-bg h1,.section-rbc-bg h2,.section-rbc-bg h3{color:#f5efe4}
+.section-rbc-bg p,.section-rbc-bg .s-intro{color:rgba(245,239,228,.72)}
+.section-rbc-bg .chip-vert{background:rgba(45,90,27,.45);border:1.5px solid rgba(45,90,27,.55);color:#9dd47a}
+.section-rbc-bg .ap-val{background:rgba(245,239,228,.08);border-left-color:#7cbb5a}
+.section-rbc-bg .ap-val h4{color:#f5efe4}
+.section-rbc-bg .ap-val p{color:rgba(245,239,228,.65)}
+.section-rbc-bg .ap-txt p{color:rgba(245,239,228,.72)}
+.contact-grid{display:grid;grid-template-columns:1.65fr 1fr;gap:48px;align-items:start}
+.contact-left{display:flex;flex-direction:column;gap:22px;width:100%;min-width:0}
+.contact-card-info{background:#2c2926;border-radius:18px;padding:30px;box-shadow:0 6px 32px rgba(0,0,0,.35);border:1px solid #3a3632}
+.contact-card-title{font-family:'Lora',serif;font-size:1rem;color:#e8ddd0;margin-bottom:22px;padding-bottom:14px;border-bottom:1px solid #3a3632}
+.c-row{display:flex;align-items:flex-start;gap:13px;margin-bottom:16px}
+.c-row:last-of-type{margin-bottom:0}
+.c-ico{width:40px;height:40px;border-radius:10px;flex-shrink:0;background:rgba(45,90,27,.25);color:#7cbb5a;display:flex;align-items:center;justify-content:center;font-size:.95rem;border:1px solid rgba(45,90,27,.4)}
+.c-lbl{font-size:.6rem;font-weight:800;letter-spacing:.11em;text-transform:uppercase;color:#665e56;margin-bottom:3px}
+.c-val{font-size:.9rem;font-weight:700;color:#d4c9bc;display:block;text-decoration:none}
+.c-val:hover{color:#7cbb5a}
+.c-socials{display:flex;gap:9px;margin-top:18px;padding-top:16px;border-top:1px solid #3a3632}
+.c-social-btn{display:inline-flex;align-items:center;gap:6px;padding:8px 15px;border-radius:99px;font-size:.74rem;font-weight:700;text-decoration:none;transition:.2s;letter-spacing:.02em}
+.c-social-insta{background:rgba(193,53,132,.15);color:#e47abb;border:1px solid rgba(193,53,132,.25)}.c-social-insta:hover{background:#c13584;color:#fff;border-color:#c13584}
+.c-social-tiktok{background:rgba(255,255,255,.07);color:#c8c0b8;border:1px solid rgba(255,255,255,.12)}.c-social-tiktok:hover{background:#fff;color:#111;border-color:#fff}
+.contact-steps{background:linear-gradient(145deg,#1c3a14 0%,#2d5a1b 100%);border-radius:18px;padding:26px 30px}
+.cs-header{font-size:.62rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:rgba(245,239,228,.5);margin-bottom:18px}
+.cs-item{display:flex;align-items:flex-start;gap:13px;margin-bottom:16px}
+.cs-item:last-child{margin-bottom:0}
+.cs-num{width:30px;height:30px;border-radius:50%;background:rgba(245,239,228,.12);border:1.5px solid rgba(245,239,228,.22);color:#f5efe4;display:flex;align-items:center;justify-content:center;font-size:.8rem;font-weight:800;flex-shrink:0;margin-top:2px}
+.cs-body strong{display:block;font-size:.86rem;color:#f5efe4;margin-bottom:2px;font-weight:700}
+.cs-body span{font-size:.76rem;color:rgba(245,239,228,.6)}
+.form-box{background:#fff;border-radius:20px;padding:38px;box-shadow:0 16px 64px rgba(0,0,0,.45);border:1px solid rgba(255,255,255,.06)}
+.form-box-hd{margin-bottom:26px;padding-bottom:18px;border-bottom:1.5px solid #ede8e0}
+.form-box-hd h3{font-family:'Lora',serif;font-size:1.22rem;color:#1a1a1a;margin-bottom:5px}
+.form-box-hd p{font-size:.82rem;color:#999}
 .form-row2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-.fg{margin-bottom:15px}
-.fg label{display:block;font-size:.68rem;font-weight:800;letter-spacing:.09em;text-transform:uppercase;color:#444;margin-bottom:6px}
-.fg input,.fg select,.fg textarea{width:100%;padding:12px 16px;border:1.5px solid var(--creme-deep);border-radius:8px;font-family:'Raleway',sans-serif;font-size:.88rem;color:var(--texte);background:var(--creme);outline:none;transition:var(--t)}
-.fg input:focus,.fg select:focus,.fg textarea:focus{border-color:var(--vert);box-shadow:0 0 0 3px rgba(45,90,27,.1);background:var(--blanc-chaud)}
+.fg{margin-bottom:14px}
+.fg label{display:block;font-size:.63rem;font-weight:800;letter-spacing:.09em;text-transform:uppercase;color:#777;margin-bottom:6px}
+.fg input,.fg select,.fg textarea{width:100%;padding:12px 15px;border:1.5px solid #e4ddd4;border-radius:10px;font-family:'Raleway',sans-serif;font-size:.88rem;color:#1a1a1a;background:#faf8f5;outline:none;transition:var(--t)}
+.fg input:focus,.fg select:focus,.fg textarea:focus{border-color:var(--vert);box-shadow:0 0 0 3px rgba(45,90,27,.09);background:#fff}
 .fg textarea{resize:vertical;min-height:100px}
+.services-grid{display:grid;grid-template-columns:1fr 1fr;gap:0;background:#faf8f5;border:1.5px solid #e4ddd4;border-radius:12px;overflow:hidden}
+.srv-group{padding:16px 18px}
+.srv-group:first-child{border-right:1.5px solid #e4ddd4}
+.srv-group-title{font-size:.63rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;margin-bottom:12px;display:flex;align-items:center;gap:6px;padding-bottom:8px;border-bottom:1px solid #e8e2d8}
+.srv-group-title.vert{color:var(--vert)}.srv-group-title.marron{color:#7a4f2e}
+.srv-checks{display:flex;flex-direction:column;gap:8px}
+.srv-check{display:flex;align-items:center;gap:8px;font-size:.82rem;font-weight:500;cursor:pointer;color:#2c2318;line-height:1.3}
+.srv-check input{accent-color:var(--vert);width:14px;height:14px;flex-shrink:0}
+.btn-submit{width:100%;padding:16px;background:linear-gradient(135deg,#2d5a1b,#3d7825);color:#fff;border:none;border-radius:12px;font-family:'Raleway',sans-serif;font-size:.92rem;font-weight:800;letter-spacing:.05em;cursor:pointer;transition:.22s;display:flex;align-items:center;justify-content:center;gap:10px;margin-top:6px}
+.btn-submit:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(45,90,27,.45)}
+.form-trust{display:flex;justify-content:center;gap:20px;margin-top:13px;flex-wrap:wrap}
+.form-trust span{font-size:.68rem;color:#b0a89e;display:flex;align-items:center;gap:5px}
+.form-trust i{color:var(--vert);font-size:.66rem}
 
 /* ZONE */
 .zone-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start}
 .zone-map{background:linear-gradient(135deg,var(--vert-pale),var(--creme-dark));border-radius:16px;height:370px;border:2px solid var(--vert-light);display:flex;align-items:center;justify-content:center;font-size:4.5rem;position:relative;overflow:hidden}
-.zone-map::after{content:'&#x1F4CD; Val-d\'Oise (95)';position:absolute;bottom:18px;left:50%;transform:translateX(-50%);background:var(--vert);color:#fff;font-size:.75rem;font-family:'Raleway',sans-serif;font-weight:800;letter-spacing:.09em;text-transform:uppercase;padding:7px 18px;border-radius:99px;white-space:nowrap}
+.zone-map::after{content:'Val-d\'Oise (95)';position:absolute;bottom:18px;left:50%;transform:translateX(-50%);background:var(--vert);color:#fff;font-size:.75rem;font-family:'Raleway',sans-serif;font-weight:800;letter-spacing:.09em;text-transform:uppercase;padding:7px 18px;border-radius:99px;white-space:nowrap}
 .zone-note{margin-top:18px;padding:14px 18px;background:var(--marron-pale);border-left:3px solid var(--marron);border-radius:0 8px 8px 0;font-size:.83rem;color:var(--marron);font-weight:600}
 
 /* &#xC0; PROPOS */
@@ -345,6 +393,12 @@ footer{background:#1a1208;color:rgba(245,239,228,.45)}
 /* RESPONSIVE */
 @media(max-width:900px){
   .contact-grid,.ap-grid,.zone-grid{grid-template-columns:1fr}
+  .contact-left{flex-direction:column}
+  .services-grid{grid-template-columns:1fr}
+  .srv-group:first-child{border-right:none;border-bottom:1.5px solid #e4ddd4}
+  .form-box{padding:26px 20px}
+  .contact-section-bg{padding:50px 6%}
+  .contact-hero{padding:52px 6% 60px}
   .process-wrap{grid-template-columns:1fr 1fr;gap:28px}
   .process-wrap::before{display:none}
   .footer-main{grid-template-columns:1fr 1fr}
@@ -369,8 +423,8 @@ footer{background:#1a1208;color:rgba(245,239,228,.45)}
 <!-- NAV -->
 
 <nav>
-  <div onclick="goPage('accueil')" style="cursor:pointer;display:flex;align-items:center;gap:12px;">
-    <img src="https://i.postimg.cc/Sy5DcfQk/IMG-0433.png" width="54" height="54" alt="Logo RBC Solution" style="display:block;display:block;"/>
+  <div onclick="goPage('accueil');window.scrollTo({top:0,behavior:'smooth'});" style="cursor:pointer;display:flex;align-items:center;gap:12px;">
+    <img src="https://i.postimg.cc/Sy5DcfQk/IMG-0433.png" width="54" height="54" alt="Logo RBC Solution" style="display:block;mix-blend-mode:multiply;"/>
     <div style="display:flex;flex-direction:column;line-height:1.1;">
       <div style="display:flex;align-items:baseline;">
         <span style="font-family:'Raleway',sans-serif;font-weight:800;font-size:1.25rem;color:#2d5a1b;letter-spacing:.02em;">RBC</span>
@@ -381,25 +435,25 @@ footer{background:#1a1208;color:rgba(245,239,228,.45)}
   </div>
   <ul class="nav-links" id="navLinks">
     <li><a class="active" onclick="goPage('accueil',this)">Accueil</a></li>
-    <li><a onclick="goPage('services-vert',this)">&#x1F33F; Solution Vert</a></li>
-    <li><a onclick="goPage('services-solution',this)">&#x1F504; Solution Renouveau</a></li>
+    <li><a onclick="goPage('services-vert',this)"><i class="fa-solid fa-leaf" style="font-size:.75rem;"></i> Solution Vert</a></li>
+    <li><a onclick="goPage('services-solution',this)"><i class="fa-solid fa-arrows-rotate" style="font-size:.75rem;"></i> Solution Renouveau</a></li>
     <li><a onclick="goPage('realisations',this)">R&#xE9;alisations</a></li>
     <li><a onclick="goPage('apropos',this)">&#xC0; propos</a></li>
-    <li><a href="tel:0768582562" class="nav-tel">&#x1F4DE; 07 68 58 25 62</a></li>
+    <li><a href="tel:0768582562" class="nav-tel"><i class="fa-solid fa-mobile-screen"></i> 07 68 58 25 62</a></li>
     <li><a onclick="goPage('contact',this)" class="nav-devis">Devis gratuit</a></li>
   </ul>
-  <div class="burger" id="burger" onclick="toggleBurger()">
+  <div class="burger" id="burger" onclick="toggleBurger()" style="margin-left:auto;">
     <span></span><span></span><span></span>
   </div>
 </nav>
 <div class="mob-menu" id="mobMenu">
   <a onclick="goPage('accueil')">Accueil</a>
-  <a onclick="goPage('services-vert')">&#x1F33F; RBC Solution Vert</a>
-  <a onclick="goPage('services-solution')">&#x1F504; RBC Solution Renouveau</a>
+  <a onclick="goPage('services-vert')"><i class="fa-solid fa-leaf" style="font-size:.75rem;"></i> RBC Solution Vert</a>
+  <a onclick="goPage('services-solution')"><i class="fa-solid fa-truck-moving" style="font-size:.75rem;"></i> RBC Solution Renouveau</a>
   <a onclick="goPage('realisations')">R&#xE9;alisations</a>
   <a onclick="goPage('apropos')">&#xC0; propos</a>
   <a onclick="goPage('contact')">Devis gratuit</a>
-  <a href="tel:0768582562">&#x1F4DE; 07 68 58 25 62</a>
+  <a href="tel:0768582562" style="font-family:'Courier New',monospace;letter-spacing:.1em;"><i class="fa-solid fa-mobile-screen"></i> 07 68 58 25 62</a>
 </div>
 
 <!-- &#x2550;&#x2550;&#x2550;&#x2550;&#x2550;&#x2550;&#x2550;&#x2550;&#x2550;&#x2550;&#x2550;&#x2550;&#x2550;&#x2550;&#x2550;&#x2550;&#x2550;&#x2550;&#x2550;&#x2550;&#x2550;&#x2550;&#x2550;&#x2550;&#x2550;&#x2550;&#x2550;&#x2550;&#x2550;&#x2550;&#x2550;&#x2550;&#x2550;&#x2550;
@@ -437,16 +491,9 @@ footer{background:#1a1208;color:rgba(245,239,228,.45)}
     <div class="hba-inner">
       <div class="hba-badge">
         <span style="width:5px;height:5px;border-radius:50%;background:#c8e8a8;display:inline-block;flex-shrink:0;"></span>
-        &#x1F4CD; Val-d'Oise &amp; alentours
+        <i class="fa-solid fa-location-dot" style="font-size:.8rem;"></i> Val-d'Oise &amp; alentours
       </div>
-      <div class="hba-logo-row">
-        <img src="https://i.postimg.cc/Sy5DcfQk/IMG-0433.png" width="46" height="46" alt="Logo RBC Solution" style="display:block;display:block;"/>
-        <div style="text-align:left;line-height:1.15;">
-          <div style="font-family:'Raleway',sans-serif;font-weight:800;font-size:1.2rem;color:#fff;letter-spacing:.04em;">RBC <span style="opacity:.6">SOLUTION</span></div>
-          <div style="font-family:'Lora',serif;font-size:.58rem;color:rgba(255,255,255,.4);letter-spacing:.1em;font-style:italic;">Un probl&#xE8;me ? Une solution.</div>
-        </div>
-      </div>
-      <p class="hba-sub">Espaces verts, d&#xE9;barras, d&#xE9;m&#xE9;nagement &amp; remise en &#xE9;tat.<br>Scrollez pour voir la diff&#xE9;rence.</p>
+      <p class="hba-sub">Espaces verts, d&#xE9;barras, d&#xE9;m&#xE9;nagement &amp; remise en &#xE9;tat.<br><span style="display:inline-block;margin-top:12px;font-family:'Raleway',sans-serif;font-size:clamp(1.1rem,3.5vw,1.6rem);font-weight:800;letter-spacing:.08em;text-transform:uppercase;background:linear-gradient(90deg,#c8893a 0%,#e8b87a 40%,#7cbb5a 75%,#4a9e2a 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;filter:drop-shadow(0 2px 6px rgba(0,0,0,.4));">1 appel, on s&rsquo;occupe de tout.</span></p>
       <div class="hba-btns">
         <button class="btn btn-creme" onclick="goPage('contact')">Devis gratuit &#x2192;</button>
       </div>
@@ -473,7 +520,7 @@ footer{background:#1a1208;color:rgba(245,239,228,.45)}
 <div onclick="goPage('services-vert')" style="background:rgba(45,90,27,.6);border:2px solid rgba(200,232,168,.35);border-radius:18px;padding:36px 32px;cursor:pointer;transition:var(--t);"
   onmouseover="this.style.transform='translateY(-5px)';this.style.background='rgba(45,90,27,.8)'"
   onmouseout="this.style.transform='none';this.style.background='rgba(45,90,27,.6)'">
-  <div style="font-size:3.2rem;margin-bottom:16px;">&#x1F33F;</div>
+  <div style="font-size:2.2rem;color:#c8e8a8;margin-bottom:16px;"><i class="fa-solid fa-leaf"></i></div>
   <div style="font-size:.68rem;font-weight:800;letter-spacing:.15em;text-transform:uppercase;color:#c8e8a8;margin-bottom:10px;">P&#xF4;le Espaces Verts</div>
   <h3 style="color:#fff;font-family:'Lora',serif;font-size:1.5rem;margin-bottom:12px;">RBC Solution Vert</h3>
   <p style="color:rgba(255,255,255,.68);font-size:.88rem;line-height:1.7;">Jardinage &#xB7; Entretien &#xB7; Taille de haies &#xB7; Am&#xE9;nagement paysager &#xB7; R&#xE9;novation ext&#xE9;rieure</p>
@@ -482,7 +529,7 @@ footer{background:#1a1208;color:rgba(245,239,228,.45)}
 <div onclick="goPage('services-solution')" style="background:rgba(107,68,35,.6);border:2px solid rgba(245,239,228,.2);border-radius:18px;padding:36px 32px;cursor:pointer;transition:var(--t);"
   onmouseover="this.style.transform='translateY(-5px)';this.style.background='rgba(107,68,35,.8)'"
   onmouseout="this.style.transform='none';this.style.background='rgba(107,68,35,.6)'">
-  <div style="font-size:3.2rem;margin-bottom:16px;">&#x1F69B;</div>
+  <div style="font-size:2.2rem;color:#e8c898;margin-bottom:16px;"><i class="fa-solid fa-truck-moving"></i></div>
   <div style="font-size:.68rem;font-weight:800;letter-spacing:.15em;text-transform:uppercase;color:#e8c898;margin-bottom:10px;">P&#xF4;le D&#xE9;barras & D&#xE9;m&#xE9;nagement</div>
   <h3 style="color:#fff;font-family:'Lora',serif;font-size:1.5rem;margin-bottom:12px;">RBC Solution Renouveau</h3>
   <p style="color:rgba(255,255,255,.68);font-size:.88rem;line-height:1.7;">D&#xE9;barras &#xB7; D&#xE9;m&#xE9;nagement &#xB7; Syndrome de Diog&#xE8;ne &#xB7; Remise en &#xE9;tat locatif</p>
@@ -496,17 +543,16 @@ footer{background:#1a1208;color:rgba(245,239,228,.45)}
 
   <!-- PROCESSUS -->
 
-  <section class="section section-creme">
-    <div style="text-align:center;margin-bottom:52px;">
-      <span class="chip chip-vert">Comment &#xE7;a marche</span>
-      <h2>Un accompagnement de A &#xE0; Z</h2>
-      <p class="s-intro" style="margin:10px auto 0;text-align:center;">De votre premi&#xE8;re demande jusqu'&#xE0; la fin du chantier, on est l&#xE0;.</p>
+  <section style="background:linear-gradient(180deg,#1c3a14 0%,#2d5a1b 25%,#6b8a55 55%,#c8d8b0 80%,var(--creme) 100%);padding:50px 8% 60px;">
+    <div style="text-align:center;margin-bottom:32px;">
+      <span class="chip chip-vert" style="background:rgba(245,239,228,.15);border:1.5px solid rgba(245,239,228,.3);color:#f5efe4;">Comment &#xE7;a marche</span>
+      <h2 style="color:#f5efe4;margin-top:12px;font-size:clamp(1.4rem,3vw,2rem;">Un accompagnement de A &#xE0; Z</h2>
     </div>
     <div class="process-wrap">
-      <div class="p-step reveal"><div class="p-num">1</div><h3>Devis gratuit</h3><p>Nous nous d&#xE9;pla&#xE7;ons gratuitement pour &#xE9;valuer votre projet et &#xE9;tablir un prix pr&#xE9;cis.</p></div>
-      <div class="p-step reveal reveal-delay-1"><div class="p-num">2</div><h3>Planification</h3><p>On fixe ensemble la date selon vos contraintes et nos disponibilit&#xE9;s.</p></div>
-      <div class="p-step reveal reveal-delay-2"><div class="p-num">3</div><h3>Intervention</h3><p>Notre &#xE9;quipe r&#xE9;alise les travaux avec ponctualit&#xE9; et le mat&#xE9;riel adapt&#xE9;.</p></div>
-      <div class="p-step reveal reveal-delay-3"><div class="p-num">4</div><h3>R&#xE9;sultat propre</h3><p>Nettoyage complet, &#xE9;vacuation des d&#xE9;chets. Vous n'avez rien &#xE0; g&#xE9;rer.</p></div>
+      <div class="p-step reveal"><div class="p-num" style="background:rgba(245,239,228,.15);border-color:rgba(245,239,228,.4);color:#f5efe4;">1</div><h3 style="color:#f5efe4;">Devis gratuit</h3><p style="color:rgba(245,239,228,.75);">Nous nous d&#xE9;pla&#xE7;ons gratuitement pour &#xE9;valuer votre projet et &#xE9;tablir un prix pr&#xE9;cis.</p></div>
+      <div class="p-step reveal reveal-delay-1"><div class="p-num" style="background:rgba(245,239,228,.15);border-color:rgba(245,239,228,.4);color:#f5efe4;">2</div><h3 style="color:#f5efe4;">Planification</h3><p style="color:rgba(245,239,228,.75);">On fixe ensemble la date selon vos contraintes et nos disponibilit&#xE9;s.</p></div>
+      <div class="p-step reveal reveal-delay-2"><div class="p-num" style="background:rgba(245,239,228,.12);border-color:rgba(44,35,24,.3);color:#2c2318;">3</div><h3>Intervention</h3><p>Notre &#xE9;quipe r&#xE9;alise les travaux avec ponctualit&#xE9; et le mat&#xE9;riel adapt&#xE9;.</p></div>
+      <div class="p-step reveal reveal-delay-3"><div class="p-num" style="background:var(--blanc-chaud);border-color:var(--vert);color:var(--vert);">4</div><h3>R&#xE9;sultat propre</h3><p>Nettoyage complet, &#xE9;vacuation des d&#xE9;chets. Vous n'avez rien &#xE0; g&#xE9;rer.</p></div>
     </div>
   </section>
 
@@ -561,7 +607,7 @@ footer{background:#1a1208;color:rgba(245,239,228,.45)}
     <p>Devis gratuit, d&#xE9;placement offert. R&#xE9;ponse sous 24h dans tout le Val-d'Oise.</p>
     <div class="cta-btns">
       <button class="btn btn-creme" onclick="goPage('contact')">Demander un devis gratuit &#x2192;</button>
-      <a href="tel:0768582562" class="btn btn-outline-blanc">&#x1F4DE; 07 68 58 25 62</a>
+      <a href="tel:0768582562" class="btn btn-outline-blanc"><i class="fa-solid fa-mobile-screen"></i> 07 68 58 25 62</a>
     </div>
     <div class="cta-badges">
       <span class="cta-badge">&#x2713; Devis gratuit & sans engagement</span>
@@ -577,22 +623,22 @@ footer{background:#1a1208;color:rgba(245,239,228,.45)}
 &#x2550;&#x2550;&#x2550;&#x2550;&#x2550;&#x2550;&#x2550;&#x2550;&#x2550;&#x2550;&#x2550;&#x2550;&#x2550;&#x2550;&#x2550;&#x2550;&#x2550;&#x2550;&#x2550;&#x2550;&#x2550;&#x2550;&#x2550;&#x2550;&#x2550;&#x2550;&#x2550;&#x2550;&#x2550;&#x2550;&#x2550;&#x2550;&#x2550;&#x2550;&#x2550; -->
 
 <div id="page-services-vert" class="page">
-  <section class="section" style="background:linear-gradient(180deg,#eef5e8 0%,var(--creme) 100%);">
-    <button onclick="goPage('accueil')" style="background:none;border:none;cursor:pointer;color:var(--texte-doux);font-size:.8rem;font-weight:700;font-family:'Raleway',sans-serif;margin-bottom:16px;display:flex;align-items:center;gap:5px;">&#x2190; Retour</button>
-    <span class="chip chip-vert">&#x1F33F; RBC Solution Vert</span>
-    <h2 style="color:var(--vert);">Jardinage & Espaces verts</h2>
-    <p class="s-intro">Entretien, am&#xE9;nagement et r&#xE9;novation ext&#xE9;rieure dans le Val-d'Oise. Devis gratuit, d&#xE9;placement offert.</p>
+  <section class="section" style="background:linear-gradient(160deg,#2d5a1b 0%,#3d7825 30%,#6b6b6b 80%,#4a4a4a 100%);">
+    <button onclick="goPage('accueil')" style="background:none;border:none;cursor:pointer;color:rgba(255,255,255,.7);font-size:.8rem;font-weight:700;font-family:'Raleway',sans-serif;margin-bottom:16px;display:flex;align-items:center;gap:5px;">&#x2190; Retour</button>
+    <span class="chip chip-vert" style="background:rgba(45,90,27,.5);border:1.5px solid rgba(200,232,168,.3);color:#c8e8a8;">RBC Solution Vert</span>
+    <h2 style="color:#f5efe4;">Jardinage & Espaces verts</h2>
+    <p class="s-intro" style="color:rgba(245,239,228,.72);">Entretien, am&#xE9;nagement et r&#xE9;novation ext&#xE9;rieure dans le Val-d'Oise. Devis gratuit, d&#xE9;placement offert.</p>
     <div class="svc-grid">
-      <div class="svc-card g au d1 reveal" onclick="devis('Tonte & entretien de jardin')" style="cursor:pointer;"><div class="ico">&#x2702;&#xFE0F;</div><h3>Tonte & entretien pelouse</h3><p>Tonte r&#xE9;guli&#xE8;re, ramassage des d&#xE9;chets, fertilisation. Un gazon impeccable toute l'ann&#xE9;e.</p><div class="svc-cta">Demander un devis &#x2192;</div></div>
-      <div class="svc-card g au d2 reveal reveal-delay-1" onclick="devis('Taille de haies / arbustes')" style="cursor:pointer;"><div class="ico">&#x1F333;</div><h3>Taille de haies & arbustes</h3><p>Taille pr&#xE9;cise, entretien des bordures, formation des arbustes et arbres fruitiers.</p><div class="svc-cta">Demander un devis &#x2192;</div></div>
-      <div class="svc-card g au d3 reveal reveal-delay-2" onclick="devis('Am&#xE9;nagement paysager')" style="cursor:pointer;"><div class="ico">&#x1FAA8;</div><h3>Am&#xE9;nagement paysager</h3><p>Cr&#xE9;ation de massifs, plantation, pose de cl&#xF4;tures, dallage, all&#xE9;es et terrasses.</p><div class="svc-cta">Demander un devis &#x2192;</div></div>
-      <div class="svc-card g au d4 reveal reveal-delay-3" onclick="devis('R&#xE9;novation ext&#xE9;rieure')" style="cursor:pointer;"><div class="ico">&#x1F3D7;&#xFE0F;</div><h3>R&#xE9;novation ext&#xE9;rieure</h3><p>Ravalement de fa&#xE7;ade, nettoyage haute pression, remise en &#xE9;tat cl&#xF4;tures et murets.</p><div class="svc-cta">Demander un devis &#x2192;</div></div>
-      <div class="svc-card g au d5 reveal reveal-delay-1" onclick="devis('Nettoyage / d&#xE9;sherbage')" style="cursor:pointer;"><div class="ico">&#x1F342;</div><h3>Nettoyage & d&#xE9;sherbage</h3><p>&#xC9;vacuation feuilles mortes, d&#xE9;moussage, traitement des mauvaises herbes.</p><div class="svc-cta">Demander un devis &#x2192;</div></div>
-      <div class="svc-card g au d6 reveal reveal-delay-2" onclick="devis('Arrosage & entretien saisonnier')" style="cursor:pointer;"><div class="ico">&#x1F4A7;</div><h3>Arrosage & saisonnier</h3><p>Syst&#xE8;mes d'arrosage, pr&#xE9;paration hivernale, plantation de saison.</p><div class="svc-cta">Demander un devis &#x2192;</div></div>
+      <div class="svc-card g au d1 reveal" onclick="devis('Tonte & entretien de jardin')" style="cursor:pointer;"><div class="ico">—</div><h3>Tonte & entretien pelouse</h3><p>Tonte r&#xE9;guli&#xE8;re, ramassage des d&#xE9;chets, fertilisation. Un gazon impeccable toute l'ann&#xE9;e.</p><div class="svc-cta">Demander un devis &#x2192;</div></div>
+      <div class="svc-card g au d2 reveal reveal-delay-1" onclick="devis('Taille de haies / arbustes')" style="cursor:pointer;"><div class="ico"><i class="fa-solid fa-tree"></i></div><h3>Taille de haies & arbustes</h3><p>Taille pr&#xE9;cise, entretien des bordures, formation des arbustes et arbres fruitiers.</p><div class="svc-cta">Demander un devis &#x2192;</div></div>
+      <div class="svc-card g au d3 reveal reveal-delay-2" onclick="devis('Am&#xE9;nagement paysager')" style="cursor:pointer;"><div class="ico"><i class="fa-solid fa-seedling"></i></div><h3>Am&#xE9;nagement paysager</h3><p>Cr&#xE9;ation de massifs, plantation, pose de cl&#xF4;tures, dallage, all&#xE9;es et terrasses.</p><div class="svc-cta">Demander un devis &#x2192;</div></div>
+      <div class="svc-card g au d4 reveal reveal-delay-3" onclick="devis('R&#xE9;novation ext&#xE9;rieure')" style="cursor:pointer;"><div class="ico"><i class="fa-solid fa-house"></i></div><h3>R&#xE9;novation ext&#xE9;rieure</h3><p>Nettoyage haute pression, remise en &#xE9;tat cl&#xF4;tures et murets.</p><div class="svc-cta">Demander un devis &#x2192;</div></div>
+      <div class="svc-card g au d5 reveal reveal-delay-1" onclick="devis('Nettoyage / d&#xE9;sherbage')" style="cursor:pointer;"><div class="ico"><i class="fa-solid fa-broom"></i></div><h3>Nettoyage & d&#xE9;sherbage</h3><p>&#xC9;vacuation feuilles mortes, d&#xE9;moussage, traitement des mauvaises herbes.</p><div class="svc-cta">Demander un devis &#x2192;</div></div>
+      <div class="svc-card g au d6 reveal reveal-delay-2" onclick="devis('Arrosage & entretien saisonnier')" style="cursor:pointer;"><div class="ico">—</div><h3>Arrosage & saisonnier</h3><p>Syst&#xE8;mes d'arrosage, pr&#xE9;paration hivernale, plantation de saison.</p><div class="svc-cta">Demander un devis &#x2192;</div></div>
     </div>
     <div style="text-align:center;margin-top:52px;display:flex;gap:14px;justify-content:center;flex-wrap:wrap;">
       <button class="btn btn-vert" onclick="goPage('contact')">Demander un devis &#x2192;</button>
-      <button class="btn btn-marron" onclick="goPage('services-solution')">Voir RBC Solution Renouveau &#x1F504;</button>
+      <button class="btn btn-marron" onclick="goPage('services-solution')">Voir RBC Solution Renouveau</button>
     </div>
   </section>
 </div>
@@ -602,20 +648,20 @@ footer{background:#1a1208;color:rgba(245,239,228,.45)}
 &#x2550;&#x2550;&#x2550;&#x2550;&#x2550;&#x2550;&#x2550;&#x2550;&#x2550;&#x2550;&#x2550;&#x2550;&#x2550;&#x2550;&#x2550;&#x2550;&#x2550;&#x2550;&#x2550;&#x2550;&#x2550;&#x2550;&#x2550;&#x2550;&#x2550;&#x2550;&#x2550;&#x2550;&#x2550;&#x2550;&#x2550;&#x2550;&#x2550;&#x2550;&#x2550; -->
 
 <div id="page-services-solution" class="page">
-  <section class="section" style="background:linear-gradient(180deg,#f7f0e8 0%,var(--creme) 100%);">
-    <button onclick="goPage('accueil')" style="background:none;border:none;cursor:pointer;color:var(--texte-doux);font-size:.8rem;font-weight:700;font-family:'Raleway',sans-serif;margin-bottom:16px;display:flex;align-items:center;gap:5px;">&#x2190; Retour</button>
-    <span class="chip chip-marron">&#x1F504; RBC Solution Renouveau</span>
-    <h2 style="color:var(--marron);">D&#xE9;barras & D&#xE9;m&#xE9;nagement</h2>
-    <p class="s-intro">D&#xE9;barras, d&#xE9;m&#xE9;nagement, syndrome de Diog&#xE8;ne et remise en &#xE9;tat locatif dans le Val-d'Oise.</p>
+  <section class="section" style="background:linear-gradient(160deg,#5c3012 0%,#7a4520 30%,#6b6b6b 80%,#4a4a4a 100%);">
+    <button onclick="goPage('accueil')" style="background:none;border:none;cursor:pointer;color:rgba(255,255,255,.7);font-size:.8rem;font-weight:700;font-family:'Raleway',sans-serif;margin-bottom:16px;display:flex;align-items:center;gap:5px;">&#x2190; Retour</button>
+    <span class="chip chip-marron" style="background:rgba(92,48,18,.5);border:1.5px solid rgba(200,160,100,.3);color:#e8c48a;">RBC Solution Renouveau</span>
+    <h2 style="color:#f5efe4;">D&#xE9;barras & D&#xE9;m&#xE9;nagement</h2>
+    <p class="s-intro" style="color:rgba(245,239,228,.72);">D&#xE9;barras, d&#xE9;m&#xE9;nagement, syndrome de Diog&#xE8;ne et remise en &#xE9;tat locatif dans le Val-d'Oise.</p>
     <div class="svc-grid">
-      <div class="svc-card m au d1 reveal" onclick="devis('D&#xE9;barras')" style="cursor:pointer;"><div class="ico">&#x1F3E0;</div><h3>D&#xE9;barras complet</h3><p>Vider maison, appartement, cave ou grenier encombr&#xE9;. Tri et &#xE9;vacuation inclus.</p><div class="svc-cta svc-cta-m">Demander un devis &#x2192;</div></div>
-      <div class="svc-card m au d2 reveal reveal-delay-1" onclick="devis('D&#xE9;m&#xE9;nagement')" style="cursor:pointer;"><div class="ico">&#x1F4E6;</div><h3>D&#xE9;m&#xE9;nagement</h3><p>Transport s&#xE9;curis&#xE9; de vos meubles et cartons, emballage et installation inclus.</p><div class="svc-cta svc-cta-m">Demander un devis &#x2192;</div></div>
-      <div class="svc-card m au d3 reveal reveal-delay-2" onclick="devis('Syndrome de Diog&#xE8;ne')" style="cursor:pointer;"><div class="ico">&#x1F9F9;</div><h3>Syndrome de Diog&#xE8;ne</h3><p>Intervention sp&#xE9;cialis&#xE9;e et bienveillante pour logements encombr&#xE9;s &#xE0; l'extr&#xEA;me. Discr&#xE9;tion totale.</p><div class="svc-cta svc-cta-m">Demander un devis &#x2192;</div></div>
-      <div class="svc-card m au d4 reveal reveal-delay-3" onclick="devis('Remise en &#xE9;tat locatif')" style="cursor:pointer;"><div class="ico">&#x1F511;</div><h3>Remise en &#xE9;tat locatif</h3><p>Nettoyage approfondi et remise en &#xE9;tat d'un logement entre deux locataires.</p><div class="svc-cta svc-cta-m">Demander un devis &#x2192;</div></div>
+      <div class="svc-card m au d1 reveal" onclick="devis('D&#xE9;barras')" style="cursor:pointer;"><div class="ico"><i class="fa-solid fa-boxes-stacked"></i></div><h3>D&#xE9;barras complet</h3><p>Vider maison, appartement, cave ou grenier encombr&#xE9;. Tri et &#xE9;vacuation inclus.</p><div class="svc-cta svc-cta-m">Demander un devis &#x2192;</div></div>
+      <div class="svc-card m au d2 reveal reveal-delay-1" onclick="devis('D&#xE9;m&#xE9;nagement')" style="cursor:pointer;"><div class="ico"><i class="fa-solid fa-truck-moving"></i></div><h3>D&#xE9;m&#xE9;nagement</h3><p>Transport s&#xE9;curis&#xE9; de vos meubles et cartons, emballage et installation inclus.</p><div class="svc-cta svc-cta-m">Demander un devis &#x2192;</div></div>
+      <div class="svc-card m au d3 reveal reveal-delay-2" onclick="devis('Syndrome de Diog&#xE8;ne')" style="cursor:pointer;"><div class="ico"><i class="fa-solid fa-hand-holding-heart"></i></div><h3>Syndrome de Diog&#xE8;ne</h3><p>Intervention sp&#xE9;cialis&#xE9;e et bienveillante pour logements encombr&#xE9;s &#xE0; l'extr&#xEA;me. Discr&#xE9;tion totale.</p><div class="svc-cta svc-cta-m">Demander un devis &#x2192;</div></div>
+      <div class="svc-card m au d4 reveal reveal-delay-3" onclick="devis('Remise en &#xE9;tat locatif')" style="cursor:pointer;"><div class="ico"><i class="fa-solid fa-key"></i></div><h3>Remise en &#xE9;tat locatif</h3><p>Nettoyage approfondi et remise en &#xE9;tat d'un logement entre deux locataires.</p><div class="svc-cta svc-cta-m">Demander un devis &#x2192;</div></div>
     </div>
     <div style="text-align:center;margin-top:52px;display:flex;gap:14px;justify-content:center;flex-wrap:wrap;">
       <button class="btn btn-marron" onclick="goPage('contact')">Demander un devis &#x2192;</button>
-      <button class="btn btn-vert" onclick="goPage('services-vert')">Voir RBC Solution Vert &#x1F33F;</button>
+      <button class="btn btn-vert" onclick="goPage('services-vert')">Voir RBC Solution Vert</button>
     </div>
   </section>
 </div>
@@ -625,7 +671,7 @@ footer{background:#1a1208;color:rgba(245,239,228,.45)}
 &#x2550;&#x2550;&#x2550;&#x2550;&#x2550;&#x2550;&#x2550;&#x2550;&#x2550;&#x2550;&#x2550;&#x2550;&#x2550;&#x2550;&#x2550;&#x2550;&#x2550;&#x2550;&#x2550;&#x2550;&#x2550;&#x2550;&#x2550;&#x2550;&#x2550;&#x2550;&#x2550;&#x2550;&#x2550;&#x2550;&#x2550;&#x2550;&#x2550;&#x2550;&#x2550; -->
 
 <div id="page-realisations" class="page">
-  <section class="section">
+  <section class="section section-rbc-bg">
     <span class="chip chip-vert">R&#xE9;alisations</span>
     <h2>Nos r&#xE9;alisations</h2>
     <p class="s-intro">Chantiers r&#xE9;alis&#xE9;s dans le Val-d'Oise. Chaque r&#xE9;sultat est visible d&#xE8;s la fin de l'intervention.</p>
@@ -648,74 +694,120 @@ footer{background:#1a1208;color:rgba(245,239,228,.45)}
 &#x2550;&#x2550;&#x2550;&#x2550;&#x2550;&#x2550;&#x2550;&#x2550;&#x2550;&#x2550;&#x2550;&#x2550;&#x2550;&#x2550;&#x2550;&#x2550;&#x2550;&#x2550;&#x2550;&#x2550;&#x2550;&#x2550;&#x2550;&#x2550;&#x2550;&#x2550;&#x2550;&#x2550;&#x2550;&#x2550;&#x2550;&#x2550;&#x2550;&#x2550;&#x2550; -->
 
 <div id="page-contact" class="page">
-  <section class="section">
-    <span class="chip chip-vert">Nous contacter</span>
-    <h2>Demandez votre devis gratuit</h2>
-    <p class="s-intro">R&#xE9;ponse garantie sous 24h. D&#xE9;placement gratuit pour estimation sur place.</p>
-    <div class="contact-grid">
-      <div class="contact-infos">
-        <div class="c-row"><div class="c-ico">&#x1F4DE;</div><div><h4>T&#xE9;l&#xE9;phone</h4><p><a href="tel:0768582562" style="color:#2c2318;">07 68 58 25 62</a></p></div></div>
-        <div class="c-row"><div class="c-ico">&#x1F4E7;</div><div><h4>Email</h4><p style="font-size:.82rem;">contact.rbcsolution@gmail.com</p></div></div>
-        <div class="c-row"><div class="c-ico">&#x1F4CD;</div><div><h4>Zone d'intervention</h4><p>Val-d'Oise (95)</p></div></div>
-        <div class="c-row"><div class="c-ico">&#x1F550;</div><div><h4>Disponibilit&#xE9;</h4><p>Lun &#x2013; Sam : 8h &#x2013; 19h</p></div></div>
-        <div class="c-row">
-          <div class="c-ico">&#x1F4F1;</div>
-          <div>
-            <h4>R&#xE9;seaux sociaux</h4>
-            <a href="https://www.instagram.com/rbc.solution" target="_blank" style="display:flex;align-items:center;gap:6px;color:#1a1a1a;font-weight:700;font-size:.88rem;margin-bottom:8px;">&#x1F4F8; Instagram @rbc.solution</a>
-            <a href="https://www.tiktok.com/@rbc.solution" target="_blank" style="display:flex;align-items:center;gap:6px;color:#1a1a1a;font-weight:700;font-size:.88rem;">&#x1F3B5; TikTok @rbc.solution</a>
-          </div>
+
+  <div class="contact-hero">
+    <div class="contact-hero-inner">
+      <span class="chip-outline-creme">Devis gratuit</span>
+      <h1 class="contact-hero-title">Parlons de votre projet</h1>
+      <p class="contact-hero-sub">R&#xE9;ponse garantie sous 24h &nbsp;&#xB7;&nbsp; D&#xE9;placement offert &nbsp;&#xB7;&nbsp; Sans engagement</p>
+      <div class="contact-steps" style="max-width:480px;margin:28px auto 0;">
+        <div class="cs-header">Comment &#xE7;a se passe ?</div>
+        <div class="cs-item">
+          <div class="cs-num">1</div>
+          <div class="cs-body"><strong>Vous envoyez votre demande</strong><span>Via le formulaire ou par t&#xE9;l&#xE9;phone</span></div>
         </div>
-        <div class="etapes-box">
-          <h3>En 3 &#xE9;tapes simples</h3>
-          <p><strong>1.</strong> Vous remplissez le formulaire<br><strong>2.</strong> On vous rappelle sous 24h<br><strong>3.</strong> D&#xE9;placement gratuit & devis sur place</p>
+        <div class="cs-item">
+          <div class="cs-num">2</div>
+          <div class="cs-body"><strong>On vous rappelle sous 24h</strong><span>Pour cerner pr&#xE9;cis&#xE9;ment votre projet</span></div>
         </div>
-      </div>
-      <div class="form-box">
-        <h3 style="margin-bottom:22px;font-size:1.05rem;">Votre demande</h3>
-        <form action="https://formspree.io/f/mwvadewp" method="POST">
-          <div class="form-row2">
-            <div class="fg"><label>Pr&#xE9;nom</label><input type="text" name="prenom" placeholder="Jean" required/></div>
-            <div class="fg"><label>Nom</label><input type="text" name="nom" placeholder="Dupont" required/></div>
-          </div>
-          <div class="fg"><label>T&#xE9;l&#xE9;phone</label><input type="tel" name="telephone" placeholder="07 00 00 00 00" required/></div>
-          <div class="fg"><label>Email</label><input type="email" name="email" placeholder="jean@email.com" required/></div>
-          <div class="fg">
-            <label>Services souhait&#xE9;s</label>
-            <div style="background:var(--creme);border:1.5px solid var(--creme-deep);border-radius:8px;padding:14px 16px;display:flex;flex-direction:column;gap:8px;">
-              <div style="font-size:.7rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:#888;margin-bottom:2px;">&#x1F33F; RBC Solution Vert</div>
-              <label style="display:flex;align-items:center;gap:10px;font-size:.88rem;font-weight:500;cursor:pointer;text-transform:none;letter-spacing:0;"><input type="checkbox" name="service" value="Tonte & entretien de jardin" style="accent-color:var(--vert);width:16px;height:16px;"/> Tonte & entretien de jardin</label>
-              <label style="display:flex;align-items:center;gap:10px;font-size:.88rem;font-weight:500;cursor:pointer;text-transform:none;letter-spacing:0;"><input type="checkbox" name="service" value="Taille de haies / arbustes" style="accent-color:var(--vert);width:16px;height:16px;"/> Taille de haies / arbustes</label>
-              <label style="display:flex;align-items:center;gap:10px;font-size:.88rem;font-weight:500;cursor:pointer;text-transform:none;letter-spacing:0;"><input type="checkbox" name="service" value="Am&#xE9;nagement paysager" style="accent-color:var(--vert);width:16px;height:16px;"/> Am&#xE9;nagement paysager</label>
-              <label style="display:flex;align-items:center;gap:10px;font-size:.88rem;font-weight:500;cursor:pointer;text-transform:none;letter-spacing:0;"><input type="checkbox" name="service" value="R&#xE9;novation ext&#xE9;rieure" style="accent-color:var(--vert);width:16px;height:16px;"/> R&#xE9;novation ext&#xE9;rieure</label>
-              <label style="display:flex;align-items:center;gap:10px;font-size:.88rem;font-weight:500;cursor:pointer;text-transform:none;letter-spacing:0;"><input type="checkbox" name="service" value="Nettoyage / d&#xE9;sherbage" style="accent-color:var(--vert);width:16px;height:16px;"/> Nettoyage / d&#xE9;sherbage</label>
-              <label style="display:flex;align-items:center;gap:10px;font-size:.88rem;font-weight:500;cursor:pointer;text-transform:none;letter-spacing:0;"><input type="checkbox" name="service" value="Autre projet Vert" style="accent-color:var(--vert);width:16px;height:16px;"/> Autre projet Vert</label>
-              <div style="font-size:.7rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:#888;margin:6px 0 2px;">&#x1F504; RBC Solution Renouveau</div>
-              <label style="display:flex;align-items:center;gap:10px;font-size:.88rem;font-weight:500;cursor:pointer;text-transform:none;letter-spacing:0;"><input type="checkbox" name="service" value="D&#xE9;barras" style="accent-color:var(--vert);width:16px;height:16px;"/> D&#xE9;barras</label>
-              <label style="display:flex;align-items:center;gap:10px;font-size:.88rem;font-weight:500;cursor:pointer;text-transform:none;letter-spacing:0;"><input type="checkbox" name="service" value="D&#xE9;m&#xE9;nagement" style="accent-color:var(--vert);width:16px;height:16px;"/> D&#xE9;m&#xE9;nagement</label>
-              <label style="display:flex;align-items:center;gap:10px;font-size:.88rem;font-weight:500;cursor:pointer;text-transform:none;letter-spacing:0;"><input type="checkbox" name="service" value="Syndrome de Diog&#xE8;ne" style="accent-color:var(--vert);width:16px;height:16px;"/> Syndrome de Diog&#xE8;ne</label>
-              <label style="display:flex;align-items:center;gap:10px;font-size:.88rem;font-weight:500;cursor:pointer;text-transform:none;letter-spacing:0;"><input type="checkbox" name="service" value="Remise en &#xE9;tat locatif" style="accent-color:var(--vert);width:16px;height:16px;"/> Remise en &#xE9;tat locatif</label>
-            </div>
-          </div>
-          <div class="fg"><label>Votre ville</label><input type="text" name="ville" placeholder="Val-d'Oise&#x2026;"/></div>
-          <div class="fg"><label>Description du projet</label><textarea name="message" placeholder="D&#xE9;crivez bri&#xE8;vement votre besoin&#x2026;"></textarea></div>
-          <button type="submit" class="btn btn-vert" style="width:100%;">Envoyer ma demande &#x2192;</button>
-        </form>
+        <div class="cs-item">
+          <div class="cs-num">3</div>
+          <div class="cs-body"><strong>Devis gratuit sur place</strong><span>D&#xE9;placement offert, sans engagement</span></div>
+        </div>
       </div>
     </div>
-  </section>
+  </div>
+
+  <div class="contact-section-bg">
+    <div class="contact-grid">
+
+```
+  <div class="form-box">
+    <div class="form-box-hd">
+      <h3>Votre demande de devis</h3>
+      <p>Remplissez ce formulaire, nous vous recontactons rapidement.</p>
+    </div>
+    <form action="https://formspree.io/f/mwvadewp" method="POST">
+      <div class="form-row2">
+        <div class="fg"><label>Pr&#xE9;nom</label><input type="text" name="prenom" placeholder="Jean" required/></div>
+        <div class="fg"><label>Nom</label><input type="text" name="nom" placeholder="Dupont" required/></div>
+      </div>
+      <div class="form-row2">
+        <div class="fg"><label>T&#xE9;l&#xE9;phone</label><input type="tel" name="telephone" placeholder="07 00 00 00 00" required/></div>
+        <div class="fg"><label>Email</label><input type="email" name="email" placeholder="jean@email.com" required/></div>
+      </div>
+      <div class="fg">
+        <label>Services souhait&#xE9;s</label>
+        <div class="services-grid">
+          <div class="srv-group">
+            <div class="srv-group-title vert"><i class="fa-solid fa-leaf"></i> RBC Vert</div>
+            <div class="srv-checks">
+              <label class="srv-check"><input type="checkbox" name="service" value="Tonte &amp; entretien de jardin"/> Tonte &amp; entretien</label>
+              <label class="srv-check"><input type="checkbox" name="service" value="Taille de haies / arbustes"/> Taille de haies</label>
+              <label class="srv-check"><input type="checkbox" name="service" value="Am&#xE9;nagement paysager"/> Am&#xE9;nagement paysager</label>
+              <label class="srv-check"><input type="checkbox" name="service" value="R&#xE9;novation ext&#xE9;rieure"/> R&#xE9;novation ext&#xE9;rieure</label>
+              <label class="srv-check"><input type="checkbox" name="service" value="Nettoyage / d&#xE9;sherbage"/> Nettoyage / d&#xE9;sherbage</label>
+              <label class="srv-check"><input type="checkbox" name="service" value="Autre projet Vert"/> Autre projet Vert</label>
+            </div>
+          </div>
+          <div class="srv-group">
+            <div class="srv-group-title marron"><i class="fa-solid fa-truck-moving"></i> RBC Renouveau</div>
+            <div class="srv-checks">
+              <label class="srv-check"><input type="checkbox" name="service" value="D&#xE9;barras"/> D&#xE9;barras</label>
+              <label class="srv-check"><input type="checkbox" name="service" value="D&#xE9;m&#xE9;nagement"/> D&#xE9;m&#xE9;nagement</label>
+              <label class="srv-check"><input type="checkbox" name="service" value="Syndrome de Diog&#xE8;ne"/> Syndrome de Diog&#xE8;ne</label>
+              <label class="srv-check"><input type="checkbox" name="service" value="Remise en &#xE9;tat locatif"/> Remise en &#xE9;tat locatif</label>
+              <label class="srv-check"><input type="checkbox" name="service" value="Autre projet Renouveau"/> Autre projet Renouveau</label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="fg"><label>Votre ville</label><input type="text" name="ville" placeholder="Val-d'Oise&#x2026;"/></div>
+      <div class="fg"><label>Description du projet</label><textarea name="message" placeholder="D&#xE9;crivez bri&#xE8;vement votre besoin&#x2026;"></textarea></div>
+      <button type="submit" class="btn-submit">Envoyer ma demande <i class="fa-solid fa-arrow-right"></i></button>
+      <div class="form-trust">
+        <span><i class="fa-solid fa-shield-halved"></i> Gratuit &amp; sans engagement</span>
+        <span><i class="fa-solid fa-clock"></i> R&#xE9;ponse sous 24h</span>
+        <span><i class="fa-solid fa-lock"></i> Donn&#xE9;es s&#xE9;curis&#xE9;es</span>
+      </div>
+      <p style="font-size:.68rem;color:#bbb;text-align:center;margin-top:10px;line-height:1.6;">Les informations collect&#xE9;es sont utilis&#xE9;es uniquement pour traiter votre demande de devis. Conform&#xE9;ment au RGPD, vous disposez d'un droit d'acc&#xE8;s et de suppression de vos donn&#xE9;es &mdash; <a onclick="goPage('mentions')" style="color:#aaa;text-decoration:underline;cursor:pointer;">voir notre politique de confidentialit&#xE9;</a>.</p>
+    </form>
+  </div>
+
+  <div class="contact-left">
+    <div class="contact-card-info">
+      <div class="contact-card-title">Nous joindre</div>
+      <div class="c-row">
+        <div class="c-ico"><i class="fa-solid fa-phone"></i></div>
+        <div><div class="c-lbl">T&#xE9;l&#xE9;phone</div><a href="tel:0768582562" class="c-val">07 68 58 25 62</a><a href="tel:0651502065" class="c-val" style="font-size:.78rem;opacity:.7;margin-top:2px;">06 51 50 20 65</a></div>
+      </div>
+      <div class="c-row">
+        <div class="c-ico"><i class="fa-solid fa-envelope"></i></div>
+        <div><div class="c-lbl">Email</div><span class="c-val">contact.rbcsolution@gmail.com</span></div>
+      </div>
+      <div class="c-row">
+        <div class="c-ico"><i class="fa-solid fa-location-dot"></i></div>
+        <div><div class="c-lbl">Zone d'intervention</div><span class="c-val">Val-d'Oise (95) &amp; environs</span></div>
+      </div>
+      <div class="c-row">
+        <div class="c-ico"><i class="fa-solid fa-clock"></i></div>
+        <div><div class="c-lbl">Disponibilit&#xE9;</div><span class="c-val">Lun &#x2013; Sam : 8h &#x2013; 19h</span></div>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+```
+
+  </div>
 
   <section class="section section-creme" style="padding-top:65px;padding-bottom:70px;">
     <span class="chip chip-vert">Zone d'intervention</span>
-    <h2>Nous intervenons dans tout le Val-d'Oise</h2>
-    <div class="zone-grid" style="margin-top:40px;">
-      <div class="zone-map">&#x1F5FA;&#xFE0F;</div>
-      <div>
-        <h3 style="margin-bottom:14px;">Val-d'Oise & environs</h3>
-        <p style="font-size:.95rem;color:var(--texte-doux);line-height:1.9;margin-bottom:22px;">Nous intervenons dans tout le <strong style="color:var(--vert);">Val-d'Oise (95)</strong> et ses environs. N'h&#xE9;sitez pas &#xE0; nous contacter pour savoir si nous intervenons dans votre commune.</p>
-        <div class="zone-note">&#x1F4DE; Contactez-nous pour plus d'infos sur notre zone d'intervention.</div>
-        <div style="margin-top:22px;"><button class="btn btn-vert" onclick="document.querySelector('.form-box')?.scrollIntoView({behavior:'smooth',block:'center'})">Nous contacter &#x2192;</button></div>
-      </div>
+    <h2>Nous intervenons dans tout le Val-d'Oise &amp; ses environs</h2>
+    <div style="margin-top:30px;">
+      <div class="zone-note"><i class="fa-solid fa-phone" style="margin-right:6px;"></i> Contactez-nous pour savoir si nous intervenons dans votre commune.</div>
+      <div style="margin-top:22px;"><button class="btn btn-vert" onclick="goPage('contact')">Nous contacter &#x2192;</button></div>
     </div>
   </section>
 
@@ -728,7 +820,7 @@ footer{background:#1a1208;color:rgba(245,239,228,.45)}
       <div class="faq-item reveal"><div class="faq-q" onclick="faq(this)"><span>Les devis sont-ils vraiment gratuits ?</span><span class="faq-ico">+</span></div><div class="faq-a">Oui, totalement gratuits et sans engagement. Nous nous d&#xE9;pla&#xE7;ons sur place pour &#xE9;valuer votre projet avant de vous proposer un prix. Aucun frais cach&#xE9;, aucune surprise.</div></div>
       <div class="faq-item reveal"><div class="faq-q" onclick="faq(this)"><span>Quels sont vos d&#xE9;lais d'intervention ?</span><span class="faq-ico">+</span></div><div class="faq-a">Nous r&#xE9;pondons sous 24h apr&#xE8;s votre demande. Pour un devis pr&#xE9;cis, nous organisons une visite sur site sous 48 &#xE0; 72h selon nos disponibilit&#xE9;s.</div></div>
       <div class="faq-item reveal"><div class="faq-q" onclick="faq(this)"><span>Intervenez-vous partout dans le Val-d'Oise ?</span><span class="faq-ico">+</span></div><div class="faq-a">Nous intervenons dans tout le Val-d'Oise (95) et ses environs. Contactez-nous pour v&#xE9;rifier votre secteur.</div></div>
-      <div class="faq-item reveal"><div class="faq-q" onclick="faq(this)"><span>&#xC9;vacuez-vous les d&#xE9;chets apr&#xE8;s le chantier ?</span><span class="faq-ico">+</span></div><div class="faq-a">Oui, le nettoyage complet et l'&#xE9;vacuation des d&#xE9;chets sont inclus dans chaque intervention. Vous n'avez rien &#xE0; g&#xE9;rer.</div></div>
+      <div class="faq-item reveal"><div class="faq-q" onclick="faq(this)"><span>&#xC9;vacuez-vous les d&#xE9;chets apr&#xE8;s le chantier ?</span><span class="faq-ico">+</span></div><div class="faq-a">Oui, et c'est l'un de nos grands avantages. Que ce soit apr&#xE8;s un chantier jardin, un d&#xE9;barras ou une remise en &#xE9;tat, on repart en laissant tout propre. D&#xE9;chets verts, encombrants, gravats &#x2014; tout est &#xE9;vacu&#xE9; et tri&#xE9;. Vous n'avez strictement rien &#xE0; g&#xE9;rer, avant ni apr&#xE8;s.</div></div>
       <div class="faq-item reveal"><div class="faq-q" onclick="faq(this)"><span>Puis-je avoir un entretien r&#xE9;gulier de mon jardin ?</span><span class="faq-ico">+</span></div><div class="faq-a">Absolument. Nous proposons des passages r&#xE9;guliers (hebdomadaires, bimensuels ou mensuels) adapt&#xE9;s &#xE0; votre jardin et votre budget.</div></div>
       <div class="faq-item reveal"><div class="faq-q" onclick="faq(this)"><span>Faites-vous les d&#xE9;barras complets de maison ?</span><span class="faq-ico">+</span></div><div class="faq-a">Oui, c'est l'une de nos sp&#xE9;cialit&#xE9;s. Nous vidons enti&#xE8;rement maisons, appartements, caves et greniers, avec tri s&#xE9;lectif et &#xE9;vacuation inclus.</div></div>
     </div>
@@ -740,7 +832,7 @@ footer{background:#1a1208;color:rgba(245,239,228,.45)}
 &#x2550;&#x2550;&#x2550;&#x2550;&#x2550;&#x2550;&#x2550;&#x2550;&#x2550;&#x2550;&#x2550;&#x2550;&#x2550;&#x2550;&#x2550;&#x2550;&#x2550;&#x2550;&#x2550;&#x2550;&#x2550;&#x2550;&#x2550;&#x2550;&#x2550;&#x2550;&#x2550;&#x2550;&#x2550;&#x2550;&#x2550;&#x2550;&#x2550;&#x2550;&#x2550; -->
 
 <div id="page-apropos" class="page">
-  <section class="section">
+  <section class="section section-rbc-bg">
     <div class="ap-grid">
       <div class="ap-vis">
         <div class="ap-img">
@@ -767,12 +859,77 @@ footer{background:#1a1208;color:rgba(245,239,228,.45)}
     <p>Un projet en t&#xEA;te ? Contactez-nous pour un devis gratuit et sans engagement.</p>
     <div class="cta-btns">
       <button class="btn btn-creme" onclick="goPage('contact')">Demander un devis &#x2192;</button>
-      <a href="tel:0768582562" class="btn btn-outline-blanc">&#x1F4DE; 07 68 58 25 62</a>
+      <a href="tel:0768582562" class="btn btn-outline-blanc"><i class="fa-solid fa-mobile-screen"></i> 07 68 58 25 62</a>
     </div>
   </div>
 </div>
 
 <!-- FOOTER -->
+
+<div id="page-mentions" class="page">
+  <section class="section">
+    <span class="chip chip-vert">Informations l&#xE9;gales</span>
+    <h2>Mentions l&#xE9;gales &amp; Confidentialit&#xE9;</h2>
+
+```
+<div style="max-width:720px;margin-top:40px;display:flex;flex-direction:column;gap:32px;">
+
+  <div>
+    <h3 style="margin-bottom:12px;">&#xC9;diteur du site</h3>
+    <p style="font-size:.9rem;line-height:1.9;color:var(--texte-doux);">
+      <strong>RBC Solution</strong><br>
+      Entrepreneur individuel &ndash; Micro-entreprise<br>
+      Ruben Rebou&#xE7;o<br>
+      3 Rue des Fauvettes, 95150 Taverny, France<br>
+      T&#xE9;l&#xE9;phone&nbsp;: 07 68 58 25 62<br>
+      Email&nbsp;: contact.rbcsolution@gmail.com<br>
+      SIREN&nbsp;: 104 060 181 &mdash; SIRET&nbsp;: 104 060 181 00013<br>
+      Code APE&nbsp;: 8130Z<br>
+      TVA non applicable &ndash; article 293 B du CGI
+    </p>
+  </div>
+
+  <div>
+    <h3 style="margin-bottom:12px;">H&#xE9;bergeur</h3>
+    <p style="font-size:.9rem;line-height:1.9;color:var(--texte-doux);">
+      GitHub Pages &ndash; GitHub, Inc. (Microsoft)<br>
+      88 Colin P Kelly Jr St, San Francisco, CA 94107, USA<br>
+      <a href="https://pages.github.com" target="_blank" style="color:var(--vert);">pages.github.com</a>
+    </p>
+  </div>
+
+  <div>
+    <h3 style="margin-bottom:12px;">Propri&#xE9;t&#xE9; intellectuelle</h3>
+    <p style="font-size:.9rem;line-height:1.9;color:var(--texte-doux);">
+      L'ensemble du contenu de ce site (textes, images, logo) est la propri&#xE9;t&#xE9; exclusive de RBC Solution. Toute reproduction sans autorisation est interdite.
+    </p>
+  </div>
+
+  <div>
+    <h3 style="margin-bottom:12px;">Politique de confidentialit&#xE9; (RGPD)</h3>
+    <p style="font-size:.9rem;line-height:1.9;color:var(--texte-doux);">
+      Les donn&#xE9;es collect&#xE9;es via le formulaire de contact (nom, t&#xE9;l&#xE9;phone, email, ville) sont utilis&#xE9;es uniquement pour r&#xE9;pondre &#xE0; votre demande de devis. Elles ne sont ni revendues ni transmises &#xE0; des tiers.<br><br>
+      Conform&#xE9;ment au R&#xE8;glement G&#xE9;n&#xE9;ral sur la Protection des Donn&#xE9;es (RGPD), vous disposez d'un droit d'acc&#xE8;s, de rectification et de suppression de vos donn&#xE9;es en contactant&nbsp;:<br>
+      <strong>contact.rbcsolution@gmail.com</strong>
+    </p>
+  </div>
+
+  <div>
+    <h3 style="margin-bottom:12px;">Cookies</h3>
+    <p style="font-size:.9rem;line-height:1.9;color:var(--texte-doux);">
+      Ce site n'utilise pas de cookies de tra&#xE7;age ni d'outils analytiques. Aucune donn&#xE9;e de navigation n'est collect&#xE9;e.
+    </p>
+  </div>
+
+  <div style="margin-top:8px;">
+    <button class="btn btn-vert" onclick="goPage('accueil')">&#x2190; Retour &#xE0; l'accueil</button>
+  </div>
+
+</div>
+```
+
+  </section>
+</div>
 
 <footer>
   <div class="footer-main">
@@ -790,8 +947,8 @@ footer{background:#1a1208;color:rgba(245,239,228,.45)}
       <h4>Navigation</h4>
       <ul>
         <li><a onclick="goPage('accueil')">Accueil</a></li>
-        <li><a onclick="goPage('services-vert')">&#x1F33F; Solution Vert</a></li>
-        <li><a onclick="goPage('services-solution')">&#x1F504; Solution Renouveau</a></li>
+        <li><a onclick="goPage('services-vert')"><i class="fa-solid fa-leaf" style="font-size:.75rem;"></i> Solution Vert</a></li>
+        <li><a onclick="goPage('services-solution')"><i class="fa-solid fa-arrows-rotate" style="font-size:.75rem;"></i> Solution Renouveau</a></li>
         <li><a onclick="goPage('realisations')">R&#xE9;alisations</a></li>
         <li><a onclick="goPage('apropos')">&#xC0; propos</a></li>
         <li><a onclick="goPage('contact')">Contact</a></li>
@@ -801,21 +958,23 @@ footer{background:#1a1208;color:rgba(245,239,228,.45)}
       <h4>Contact</h4>
       <ul>
         <li><a>&#x1F4CD; Val-d'Oise (95)</a></li>
-        <li><a href="tel:0768582562">&#x1F4DE; 07 68 58 25 62</a></li>
+        <li><a href="tel:0768582562" style="font-family:'Courier New',monospace;letter-spacing:.1em;"><i class="fa-solid fa-mobile-screen"></i> 07 68 58 25 62</a></li>
         <li><a style="font-size:.72rem;">contact.rbcsolution@gmail.com</a></li>
         <li><a onclick="goPage('contact')">Devis gratuit &#x2192;</a></li>
       </ul>
     </div>
     <div class="f-col">
-      <h4>R&#xE9;seaux</h4>
+      <h4>L&#xE9;gal</h4>
       <ul>
-        <li><a href="https://www.instagram.com/rbc.solution" target="_blank">&#x1F4F8; Instagram</a></li>
-        <li><a href="https://www.tiktok.com/@rbc.solution" target="_blank">&#x1F3B5; TikTok</a></li>
+        <li><a onclick="goPage('mentions')" style="cursor:pointer;">Mentions l&#xE9;gales</a></li>
+        <li><a onclick="goPage('mentions')" style="cursor:pointer;">Politique de confidentialit&#xE9;</a></li>
+        <li><a style="font-size:.7rem;opacity:.6;">SIREN&nbsp;: 104 060 181</a></li>
+        <li><a style="font-size:.7rem;opacity:.6;">TVA non applicable &ndash; art. 293B CGI</a></li>
       </ul>
     </div>
   </div>
   <div class="footer-btm">
-    <span>&#xA9; 2025 RBC Solution &#xB7; Val-d'Oise (95)</span>
+    <span>&#xA9; 2026 RBC Solution &middot; Val-d'Oise (95)</span>
     <em>Un probl&#xE8;me ? Une solution.</em>
   </div>
 </footer>
@@ -945,10 +1104,10 @@ function soumettreAvis() {
 
 // GALERIE
 var GALERIE_PHOTOS = [
-  { src: 'debarras1.jpg', label: 'Syndrome de Diogene' },
-  { src: 'debarras2.jpg', label: 'Debarras' },
-  { src: 'facade1.jpg', label: 'Nettoyage facade' },
-  { src: 'haie1.jpg', label: 'Taille de haie' },
+  { src: 'https://i.postimg.cc/CLfvys45/Chat-GPT-Image-17-mai-2026-21-14-02.png', label: 'D&#xE9;barras & remise en &#xE9;tat' },
+  { src: 'https://i.postimg.cc/X7CpwrVN/Chat-GPT-Image-17-mai-2026-21-23-25.png', label: 'Syndrome de Diog&#xE8;ne' },
+  { src: 'https://i.postimg.cc/pTSLjH42/IMG-0184.jpg', label: 'Nettoyage fa&#xE7;ade' },
+  { src: 'https://i.postimg.cc/pTSLjH4p/IMG-0166.jpg', label: 'Taille de haie' },
 ];
 var GALERIE_DEMO_COLORS = [
   { label: 'Taille de haie', color: 'linear-gradient(135deg,#c8dab8,#e0ecd4)' },
