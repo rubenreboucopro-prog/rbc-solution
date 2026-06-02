@@ -594,10 +594,10 @@
       <h2 style="color:#f5efe4;margin-top:12px;font-size:clamp(1.4rem,3vw,2rem;">Un accompagnement de A &#xE0; Z</h2>
     </div>
     <div class="process-wrap">
-      <div class="p-step reveal"><div class="p-num" style="background:rgba(245,239,228,.15);border-color:rgba(245,239,228,.4);color:#f5efe4;">1</div><h3 style="color:#f5efe4;">Devis gratuit</h3><p style="color:rgba(245,239,228,.75);">Nous nous d&#xE9;pla&#xE7;ons gratuitement pour &#xE9;valuer votre projet et &#xE9;tablir un prix pr&#xE9;cis.</p></div>
-      <div class="p-step reveal reveal-delay-1"><div class="p-num" style="background:rgba(245,239,228,.15);border-color:rgba(245,239,228,.4);color:#f5efe4;">2</div><h3 style="color:#f5efe4;">Planification</h3><p style="color:rgba(245,239,228,.75);">On fixe ensemble la date selon vos contraintes et nos disponibilit&#xE9;s.</p></div>
-      <div class="p-step reveal reveal-delay-2"><div class="p-num" style="background:rgba(245,239,228,.12);border-color:rgba(44,35,24,.3);color:#2c2318;">3</div><h3>Intervention</h3><p>Notre &#xE9;quipe r&#xE9;alise les travaux avec ponctualit&#xE9; et le mat&#xE9;riel adapt&#xE9;.</p></div>
-      <div class="p-step reveal reveal-delay-3"><div class="p-num" style="background:var(--blanc-chaud);border-color:var(--vert);color:var(--vert);">4</div><h3>R&#xE9;sultat propre</h3><p>Nettoyage complet, &#xE9;vacuation des d&#xE9;chets. Vous n'avez rien &#xE0; g&#xE9;rer.</p></div>
+      <div class="p-step reveal"><div class="p-num" style="background:#fff;border-color:#2d5a1b;color:#2d5a1b;">1</div><h3 style="color:#f5efe4;">Devis gratuit</h3><p style="color:rgba(245,239,228,.85);">Nous nous d&#xE9;pla&#xE7;ons gratuitement pour &#xE9;valuer votre projet et &#xE9;tablir un prix pr&#xE9;cis.</p></div>
+      <div class="p-step reveal reveal-delay-1"><div class="p-num" style="background:#fff;border-color:#2d5a1b;color:#2d5a1b;">2</div><h3 style="color:#f5efe4;">Planification</h3><p style="color:rgba(245,239,228,.85);">On fixe ensemble la date selon vos contraintes et nos disponibilit&#xE9;s.</p></div>
+      <div class="p-step reveal reveal-delay-2"><div class="p-num" style="background:#fff;border-color:#2d5a1b;color:#2d5a1b;">3</div><h3 style="color:#f5efe4;">Intervention</h3><p style="color:rgba(245,239,228,.85);">Notre &#xE9;quipe r&#xE9;alise les travaux avec ponctualit&#xE9; et le mat&#xE9;riel adapt&#xE9;.</p></div>
+      <div class="p-step reveal reveal-delay-3"><div class="p-num" style="background:#fff;border-color:#2d5a1b;color:#2d5a1b;">4</div><h3 style="color:#f5efe4;">R&#xE9;sultat propre</h3><p style="color:rgba(245,239,228,.85);">Nettoyage complet, &#xE9;vacuation des d&#xE9;chets. Vous n'avez rien &#xE0; g&#xE9;rer.</p></div>
     </div>
   </section>
 
@@ -1060,10 +1060,10 @@ function afficherNouvelAvis(avis) {
 }
 function chargerAvis() {
   try {
-    var raw = localStorage.getItem('rbc-avis');
+    var raw = localStorage.getItem('rbc-avis-v2');
     var liste = raw ? JSON.parse(raw) : [];
     if (liste.length === 0) {
-      localStorage.setItem('rbc-avis', JSON.stringify(AVIS_BASE));
+      localStorage.setItem('rbc-avis-v2', JSON.stringify(AVIS_BASE));
       for (var i = 0; i < AVIS_BASE.length; i++) afficherNouvelAvis(AVIS_BASE[i]);
     } else {
       for (var i = 0; i < liste.length; i++) afficherNouvelAvis(liste[i]);
@@ -1079,10 +1079,10 @@ function soumettreAvis() {
   if (!nom || !texte || selectedStars === 0) { alert('Merci de remplir votre nom, note et commentaire.'); return; }
   var avis = { nom: nom, ville: ville, texte: texte, note: selectedStars };
   try {
-    var raw = localStorage.getItem('rbc-avis');
+    var raw = localStorage.getItem('rbc-avis-v2');
     var liste = raw ? JSON.parse(raw) : [];
     liste.push(avis);
-    localStorage.setItem('rbc-avis', JSON.stringify(liste));
+    localStorage.setItem('rbc-avis-v2', JSON.stringify(liste));
   } catch(e) {}
   afficherNouvelAvis(avis);
   document.getElementById('avis-nom').value = '';
