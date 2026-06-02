@@ -60,7 +60,9 @@
     .page.active{display:block}
 
     /* NAV */
-    nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(245,239,228,.97);backdrop-filter:blur(16px);border-bottom:2px solid var(--creme-dark);height:80px;display:flex;align-items:center;justify-content:space-between;padding:0 5%}
+    nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(245,239,228,.97);backdrop-filter:blur(16px);border-bottom:2px solid var(--creme-dark);height:80px;display:flex;align-items:center;justify-content:space-between;padding:0 5%;transition:top .3s ease}
+    body.banner-visible nav{top:44px}
+    body.banner-visible .page{padding-top:124px}
     .nav-links{display:flex;gap:4px;list-style:none;align-items:center}
     .nav-links a{padding:6px 10px;border-radius:6px;font-size:.72rem;font-weight:700;letter-spacing:.03em;text-transform:uppercase;color:var(--texte-doux);transition:var(--t);cursor:pointer;white-space:nowrap}
     .nav-links a:hover,.nav-links a.active{background:var(--vert-pale);color:var(--vert)}
@@ -122,6 +124,10 @@
       position:absolute;inset:0;
       background:linear-gradient(to left,rgba(0,0,0,.35) 0%,rgba(0,0,0,.1) 55%,transparent 100%);
     }
+    /* États initiaux avant chargement GSAP — évite le flash au démarrage */
+    #heroBottom { transform: translateY(100%); }
+    #afterLayer { clip-path: inset(100% 0 0 0); }
+    #heroDivider { top: 100%; }
     /* Divider */
     #heroDivider {
       position:absolute;left:0;right:0;top:0;height:2px;
@@ -444,6 +450,26 @@
 
 <!-- TRACKING PIXEL -->
 <img src="https://app.rbcsolution.com/api/track-click?src=rbcsolution" width="1" height="1" style="display:none" alt=""/>
+
+<!-- BANNIÈRE APP -->
+<div id="appBanner" style="display:none;position:fixed;top:0;left:0;right:0;z-index:9999;background:linear-gradient(90deg,#1c3a14,#2d5a1b);color:#fff;padding:10px 16px;box-shadow:0 2px 12px rgba(0,0,0,.25);">
+  <div style="max-width:900px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;">
+    <div style="display:flex;align-items:center;gap:10px;flex:1;min-width:0;">
+      <span style="font-size:1.2rem;">📦</span>
+      <span style="font-size:.85rem;font-weight:600;line-height:1.4;">
+        <span style="opacity:.85;font-weight:400;">Nouveau&nbsp;·&nbsp;</span>Suivez vos devis &amp; chantiers en temps r&#xE9;el
+      </span>
+    </div>
+    <div style="display:flex;align-items:center;gap:10px;flex-shrink:0;">
+      <a href="https://app.rbcsolution.com" target="_blank"
+         style="background:#fff;color:#2d5a1b;font-size:.78rem;font-weight:800;padding:6px 14px;border-radius:20px;white-space:nowrap;letter-spacing:.03em;text-decoration:none;">
+        Acc&#xE9;der &#x2192;
+      </a>
+      <button onclick="fermerBanner()" aria-label="Fermer"
+              style="background:none;border:none;color:rgba(255,255,255,.7);font-size:1.2rem;cursor:pointer;padding:2px 6px;line-height:1;">&#x2715;</button>
+    </div>
+  </div>
+</div>
 
 <!-- NAV -->
 <nav>
@@ -1211,6 +1237,20 @@ function initCounters() {
   check();
 }
 
+// BANNIÈRE APP
+function fermerBanner() {
+  document.getElementById('appBanner').style.display = 'none';
+  document.body.classList.remove('banner-visible');
+  try { localStorage.setItem('rbc-banner-closed', '1'); } catch(e) {}
+}
+function initBanner() {
+  try { if (localStorage.getItem('rbc-banner-closed')) return; } catch(e) {}
+  setTimeout(function() {
+    document.getElementById('appBanner').style.display = 'block';
+    document.body.classList.add('banner-visible');
+  }, 1500);
+}
+
 // INIT
 window.onload = function() {
   chargerAvis();
@@ -1218,6 +1258,7 @@ window.onload = function() {
   initScrollReveal();
   initCounters();
   initHeroReveal();
+  initBanner();
 };
 </script>
 
