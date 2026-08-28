@@ -133,7 +133,7 @@
       background:linear-gradient(to top,rgba(0,0,0,.45) 0%,rgba(0,0,0,.15) 45%,transparent 100%);
     }
     /* États initiaux avant chargement GSAP — évite le flash au démarrage */
-    #heroSplitCards { transform: translateY(100%); }
+    #heroSplitCards { transform: translateY(300%); }
     #heroConciergeCard { transform: translateY(100%); }
     #afterLayer { clip-path: inset(100% 0 0 0); }
     #heroDivider { top: 100%; }
@@ -615,7 +615,7 @@
     </section>
 
     <!-- CARTES DÉBARRAS+ENTRETIEN : apparaissent à l'étape "après" -->
-    <div id="heroSplitCards" style="position:absolute;bottom:0;left:0;right:0;z-index:20;padding:0 5% 20px;">
+    <div id="heroSplitCards" style="position:absolute;bottom:18%;left:0;right:0;z-index:20;padding:0 5%;">
       <div style="display:flex;border:1.5px solid rgba(255,255,255,.15);border-radius:16px;overflow:hidden;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);">
         <!-- Débarras -->
         <div style="flex:1;padding:18px 20px;cursor:pointer;transition:background .2s;background:rgba(61,26,8,.88);" onclick="goPage('debarras')"
@@ -1549,7 +1549,7 @@ function initHeroReveal() {
   gsap.set('.hba-content',     { opacity: 1 });
   gsap.set('#labelApres',      { opacity: 0 });
   gsap.set('#labelTiers',      { opacity: 0 });
-  gsap.set('#heroSplitCards',    { y: '100%' });
+  gsap.set('#heroSplitCards',    { y: '300%' });
   gsap.set('#heroConciergeCard', { y: '100%' });
   gsap.set('#labelAvant',   { opacity: 1 });
   gsap.set('#scrollHint',   { opacity: 1 });
